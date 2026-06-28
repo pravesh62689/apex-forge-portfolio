@@ -1,0 +1,36 @@
+---
+interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+interface Props {
+  images: GalleryImage[];
+  columns?: 2 | 3 | 4;
+  variant?: 'grid' | 'masonry';
+}
+const { images, columns = 3, variant = 'grid' } = Astro.props;
+const colClass = columns === 2 ? 'md:grid-cols-2' : columns === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3';
+---
+
+<div class={`gallery-grid grid grid-cols-1 ${colClass} gap-4`}>
+  {images.map((img, i) => (
+    <div 
+      class={`gallery-item group relative rounded-2xl overflow-hidden border border-[var(--border-color)] bg-[var(--card-bg)] cursor-pointer transition-all duration-300 hover:border-[var(--primary-accent)]/30 hover:-translate-y-1 hover:shadow-xl ${variant === 'masonry' && i % 3 === 0 ? 'md:row-span-2' : ''}`}
+    >
+      <div class={`overflow-hidden ${variant === 'masonry' && i % 3 === 0 ? 'h-80' : 'h-48 md:h-56'}`}>
+        <img 
+          src={img.src} 
+          alt={img.alt} 
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+          loading="lazy"
+        />
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        {img.caption && (
+          <span class="text-xs font-medium text-white">{img.caption}</span>
+        )}
+      </div>
+    </div>
+  ))}
+</div>

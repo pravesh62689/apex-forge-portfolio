@@ -1,0 +1,55 @@
+---
+/**
+ * AtmosphereShowcase.astro — Restaurant Premium tier
+ * Immersive showcase of the restaurant's visual, acoustic, and lighting atmosphere.
+ */
+---
+
+<section class="py-24 bg-[var(--bg-color)] border-t border-[var(--border-color)]">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase tracking-widest mb-4">The Vibe</span>
+      <h2 class="text-3xl md:text-5xl font-extrabold text-[var(--text-color)] tracking-tight font-display">More Than Just Food</h2>
+      <p class="text-sm text-[var(--text-muted)] mt-4 max-w-lg mx-auto">Every corner of Bistro 62 is thoughtfully curated to craft a multi-sensory escape from the ordinary.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          title: 'Morning Light',
+          tagline: 'Brunch & Conversations',
+          desc: 'Warm sunrays stream through east-facing windows, reflecting off fresh wood accents. Combined with the rich aroma of hand-dripped coffee, it is Noida\'s best workspace away from work.',
+          icon: 'M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z',
+          bg: 'from-amber-500/5 to-orange-500/5'
+        },
+        {
+          title: 'Evening Glow',
+          tagline: 'Candlelight & Intimacy',
+          desc: 'As twilight falls, automated pendant lights soften to a warm gold glow. Table candles flickers to life, creating a low-contrast, intimate dining room perfect for couples and family dinners.',
+          icon: 'M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z',
+          bg: 'from-purple-500/5 to-indigo-500/5'
+        },
+        {
+          title: 'Acoustic Curations',
+          tagline: 'Lo-Fi to Live Sets',
+          desc: 'Our soundscape shifts from soothing acoustic covers and soft lo-fi beats during daytime lunches to weekend live unplugged sets by regional independent artists.',
+          icon: 'M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z',
+          bg: 'from-emerald-500/5 to-teal-500/5'
+        }
+      ].map(item => (
+        <div class={`showcase-card relative p-8 rounded-3xl border border-[var(--border-color)] bg-gradient-to-br ${item.bg} hover:border-amber-500/20 hover:-translate-y-1 transition-all duration-300 space-y-4`}>
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[var(--text-color)] font-display">{item.title}</h3>
+            <span class="text-[10px] font-bold text-amber-500/80 uppercase tracking-widest">{item.tagline}</span>
+          </div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

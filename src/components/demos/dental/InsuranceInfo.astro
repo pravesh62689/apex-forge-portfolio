@@ -1,0 +1,29 @@
+---
+/**
+ * InsuranceInfo.astro — Dentist Standard tier
+ * Displays payment and insurance validation details
+ */
+---
+
+<section class="py-16 bg-[var(--card-bg)] border-t border-[var(--border-color)]">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-teal-500/10 text-teal-600 border border-teal-500/20 uppercase tracking-wider mb-4">Payment</span>
+      <h2 class="text-2xl md:text-3xl font-extrabold text-[var(--text-color)] tracking-tight font-display">Flexible Payment Options</h2>
+      <p class="text-sm text-[var(--text-muted)] mt-4">We believe quality dental care should be accessible to everyone.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {[
+        { title: 'Insurance Accepted', desc: 'Most major dental insurance plans accepted and processed.' },
+        { title: 'EMI Available', desc: 'Split your treatment cost into easy monthly installments.' },
+        { title: 'UPI & Cards', desc: 'Pay conveniently via UPI, debit/credit cards, or cash.' },
+      ].map(item => (
+        <div class="p-5 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] text-center space-y-2">
+          <h4 class="text-sm font-bold text-[var(--text-color)] font-display">{item.title}</h4>
+          <p class="text-xs text-[var(--text-muted)]">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

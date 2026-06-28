@@ -1,0 +1,95 @@
+---
+const { tier = "premium" } = Astro.props;
+
+const categories = [
+  {
+    name: "Hair Cuts & Styling",
+    items: [
+      { name: "Signature Designer Haircut", price: "₹1,800", desc: "Includes luxury hair wash, head massage, customized design cut, and blowout." },
+      { name: "Volumising Blowout & Styling", price: "₹1,200", desc: "Soft waves, curls, or straight silk presses styled to perfection for events." },
+      { name: "Event Updo & Styling", price: "₹1,500", desc: "Custom editorial bun or sleek ponytail styled for wedding parties and shoots." }
+    ]
+  },
+  {
+    name: "Balayage & Advanced Care",
+    items: [
+      { name: "Luxury French Balayage", price: "₹8,500+", desc: "Bespoke hand-painted highlights, custom toner glaze, and active bond protection." },
+      { name: "Organic Keratin Therapy", price: "₹6,000+", desc: "Formaldehyde-free smoothing treatment to restore hair protein and eliminate frizz." },
+      { name: "Olaplex Hair Reconstructing Spa", price: "₹3,500", desc: "Deep bond-building molecular therapy for damaged or color-treated hair." },
+      { name: "Root Touch-Up (Organic)", price: "₹2,500", desc: "100% ammonia-free organic root tinting for seamless gray coverage." }
+    ]
+  },
+  {
+    name: "Beauty & Skin",
+    items: [
+      { name: "HydraFacial Skin Therapy", price: "₹4,500", desc: "Multi-step medical grade facial to clean pores, exfoliate, and hydrate skin." },
+      { name: "Signature Glow Makeup", price: "₹3,500", desc: "HD airbrush makeup and brow definition for private dinners and corporate galas." }
+    ]
+  }
+];
+
+// Flat list for Standard tier (6 items)
+const flatStandardItems = [
+  { name: "Signature Designer Haircut", price: "₹1,800", desc: "Includes luxury hair wash, head massage, customized design cut, and blowout." },
+  { name: "Volumising Blowout & Styling", price: "₹1,200", desc: "Soft waves, curls, or straight silk presses styled to perfection for events." },
+  { name: "Root Touch-Up (Organic)", price: "₹2,500", desc: "100% ammonia-free organic root tinting for seamless gray coverage." },
+  { name: "Luxury French Balayage", price: "₹8,500+", desc: "Bespoke hand-painted highlights, custom toner glaze, and active bond protection." },
+  { name: "Organic Keratin Therapy", price: "₹6,000+", desc: "Formaldehyde-free smoothing treatment to restore hair protein and eliminate frizz." },
+  { name: "Olaplex Hair Reconstructing Spa", price: "₹3,500", desc: "Deep bond-building molecular therapy for damaged or color-treated hair." }
+];
+---
+
+<section id="pricing" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-3 font-sans">
+        Services Menu
+      </span>
+      <h2 class="text-[clamp(1.75rem,2vw+1rem,2.75rem)] font-extrabold text-themeText mb-4 font-display">
+        Bespoke Cuts, Colors & Spa
+      </h2>
+      <p class="text-themeTextMuted text-xs sm:text-sm font-light">
+        A transparent list of our signature styling treatments. We use premium certified organic brands only.
+      </p>
+    </div>
+
+    {tier === "premium" ? (
+      <!-- Grouped categories grid (Premium) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto font-sans items-start">
+        {categories.map((cat) => (
+          <div class="space-y-6 bg-ink-900/20 border border-ink-border/50 p-6 rounded-3xl">
+            <h3 class="text-base font-bold text-brand-primary border-b border-ink-border pb-3 font-display">
+              {cat.name}
+            </h3>
+            <div class="space-y-5">
+              {cat.items.map((item) => (
+                <div class="space-y-1.5">
+                  <div class="flex justify-between items-baseline gap-2">
+                    <span class="text-xs font-semibold text-themeText">{item.name}</span>
+                    <div class="flex-grow border-b border-dashed border-ink-border/30"></div>
+                    <span class="text-xs font-bold text-themeText flex-shrink-0">{item.price}</span>
+                  </div>
+                  <p class="text-[10px] text-themeTextMuted leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <!-- Flat List (Standard) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto font-sans">
+        {flatStandardItems.map((item) => (
+          <div class="space-y-1.5 p-4 bg-ink-900/10 border border-ink-border/30 rounded-2xl">
+            <div class="flex justify-between items-baseline gap-2">
+              <span class="text-xs font-semibold text-themeText">{item.name}</span>
+              <div class="flex-grow border-b border-dashed border-ink-border/30"></div>
+              <span class="text-xs font-bold text-themeText flex-shrink-0">{item.price}</span>
+            </div>
+            <p class="text-[10px] text-themeTextMuted leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

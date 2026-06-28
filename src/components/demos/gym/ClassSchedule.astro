@@ -1,0 +1,111 @@
+---
+const { tier = "premium" } = Astro.props;
+---
+
+<section id="schedule" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-black uppercase tracking-widest text-brand-primary block mb-3 font-sans">
+        Weekly Timetable
+      </span>
+      <h2 class="text-[clamp(1.75rem,2vw+1rem,2.75rem)] font-black text-themeText mb-4 font-display uppercase tracking-tight">
+        Class Schedule
+      </h2>
+      <p class="text-themeTextMuted text-xs sm:text-sm font-sans font-medium">
+        Plan your week. High-intensity group workouts designed to fit around professional schedules.
+      </p>
+    </div>
+
+    {tier === "premium" ? (
+      <!-- Timetable Grid (Premium) -->
+      <div class="max-w-4xl mx-auto font-sans bg-ink-900 border border-ink-border rounded-3xl overflow-hidden shadow-lg">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-ink-border bg-ink-950 text-themeText font-black uppercase tracking-wider">
+                <th class="p-4 sm:p-5">Time</th>
+                <th class="p-4 sm:p-5">Mon / Wed / Fri</th>
+                <th class="p-4 sm:p-5">Tue / Thu</th>
+                <th class="p-4 sm:p-5">Saturday</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-ink-border/50 text-themeTextMuted font-medium">
+              <!-- Row 1 -->
+              <tr class="hover:bg-ink-950/40 transition-colors">
+                <td class="p-4 sm:p-5 font-bold text-themeText">06:30 AM - 07:30 AM</td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Barbell Strength</span>
+                  <span class="text-[9px] text-brand-primary font-bold uppercase tracking-widest">Coach Dev</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">MetCon HIIT</span>
+                  <span class="text-[9px] text-brand-accent font-bold uppercase tracking-widest">Coach Reena</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Saturday Conditioning</span>
+                  <span class="text-[9px] text-brand-primary font-bold uppercase tracking-widest">Team Session</span>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr class="hover:bg-ink-950/40 transition-colors">
+                <td class="p-4 sm:p-5 font-bold text-themeText">08:00 AM - 09:00 AM</td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Olympic Lifting Foundations</span>
+                  <span class="text-[9px] text-brand-primary font-bold uppercase tracking-widest">Coach Dev</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Core & Flow</span>
+                  <span class="text-[9px] text-brand-accent font-bold uppercase tracking-widest">Coach Reena</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="text-ink-border">— Open Gym floor —</span>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr class="hover:bg-ink-950/40 transition-colors">
+                <td class="p-4 sm:p-5 font-bold text-themeText">05:30 PM - 06:30 PM</td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Hypertrophy Split</span>
+                  <span class="text-[9px] text-brand-primary font-bold uppercase tracking-widest">Coach Karan</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Athletic Conditioning</span>
+                  <span class="text-[9px] text-brand-primary font-bold uppercase tracking-widest">Coach Dev</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="text-ink-border">— Open Gym floor —</span>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr class="hover:bg-ink-950/40 transition-colors">
+                <td class="p-4 sm:p-5 font-bold text-themeText">07:00 PM - 08:00 PM</td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">Powerlifting Club</span>
+                  <span class="text-[9px] text-brand-primary font-bold uppercase tracking-widest">Coach Karan</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="font-bold text-white block">HIIT Engine</span>
+                  <span class="text-[9px] text-brand-accent font-bold uppercase tracking-widest">Coach Reena</span>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="text-ink-border">— Gym Closed —</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ) : (
+      <!-- Simplified notice text (Standard) -->
+      <div class="max-w-xl mx-auto p-8 rounded-3xl bg-ink-900 border border-ink-border text-center space-y-3 font-sans">
+        <h4 class="text-base font-bold text-white uppercase tracking-wider">Classes Run Daily</h4>
+        <p class="text-xs text-themeTextMuted leading-relaxed">
+          We run a complete schedule of coach-led strength training, MetCon HIIT intervals, and mobility classes from 6:30 AM to 8:00 PM. Call or message us directly on WhatsApp to get today's slots!
+        </p>
+      </div>
+    )}
+  </div>
+</section>

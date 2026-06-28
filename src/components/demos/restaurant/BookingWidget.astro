@@ -1,0 +1,68 @@
+---
+---
+
+<section id="booking" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-xl mx-auto px-4">
+    <div class="bg-ink-900 border border-ink-border rounded-3xl p-8 lg:p-10 shadow-xl space-y-6">
+      <div class="text-center space-y-2">
+        <h3 class="text-xl lg:text-2xl font-bold text-themeText font-display">Reserve a Table</h3>
+        <p class="text-xs text-themeTextMuted">Select your slot to request a dining reservation at Bistro 62 Noida.</p>
+      </div>
+
+      <!-- Reservation Form -->
+      <form id="mock-booking-form" class="space-y-4 text-xs font-sans" onsubmit="event.preventDefault(); document.getElementById('booking-success-msg').classList.remove('hidden'); document.getElementById('mock-booking-form').classList.add('hidden');">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="rest-book-date" class="text-themeTextMuted block font-medium">Select Date</label>
+            <input id="rest-book-date" type="date" required class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="rest-book-time" class="text-themeTextMuted block font-medium">Select Time</label>
+            <select id="rest-book-time" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary">
+              <option>7:00 PM</option>
+              <option>8:00 PM</option>
+              <option>9:00 PM</option>
+              <option>10:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="rest-book-guests" class="text-themeTextMuted block font-medium">Guests Count</label>
+            <select id="rest-book-guests" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary">
+              <option>2 Guests</option>
+              <option>4 Guests</option>
+              <option>6 Guests</option>
+              <option>8+ Guests</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label for="rest-book-phone" class="text-themeTextMuted block font-medium">Your Phone</label>
+            <input id="rest-book-phone" type="tel" required placeholder="+91 99999 99999" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label for="rest-book-name" class="text-themeTextMuted block font-medium">Full Name</label>
+          <input id="rest-book-name" type="text" required placeholder="Aarav Sharma" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+        </div>
+
+        <button type="submit" class="btn-magnetic w-full py-3.5 rounded-xl bg-brand-primary hover:bg-brand-primary/95 text-white font-bold transition-all shadow-md shadow-brand-primary/20">
+          Submit Table Request
+        </button>
+      </form>
+
+      <!-- Success Screen -->
+      <div id="booking-success-msg" class="hidden text-center p-6 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 space-y-2">
+        <svg class="w-8 h-8 text-brand-primary mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" /></svg>
+        <span class="text-sm font-bold text-brand-primary block font-display">Reservation Requested!</span>
+        <span class="text-[10px] text-themeTextMuted block">We have sent a mock confirmation. In a live production build, this routes directly into their table management system.</span>
+        <button onclick="document.getElementById('booking-success-msg').classList.add('hidden'); document.getElementById('mock-booking-form').classList.remove('hidden');" class="mt-4 text-[10px] text-brand-primary font-bold hover:underline">
+          Book another table
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>

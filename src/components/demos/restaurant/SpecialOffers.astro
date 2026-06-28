@@ -1,0 +1,100 @@
+---
+const offers = [
+  {
+    title: "Mon-Wed: Free Dessert Stack",
+    desc: "Order any artisanal pizza and get a classic Sicilian Pistachio Croissant or Tiramisu completely on the house.",
+    tag: "Midweek Perk",
+    code: "B62FREE",
+    color: "from-amber-600 to-amber-700"
+  },
+  {
+    title: "Noida Sector 62 Lunch Combo",
+    desc: "A warm slice of pizza, a fresh single-origin espresso brew, and chef salad. Just ₹399 between 12:00 PM - 3:30 PM.",
+    tag: "Lunch Special",
+    code: "LUNCH399",
+    color: "from-amber-700 to-yellow-700"
+  },
+  {
+    title: "Happy Espresso Hours",
+    desc: "Buy one cappuccino or pour-over siphon coffee, get another completely free. Daily 8:00 AM - 10:30 AM.",
+    tag: "Morning Boost",
+    code: "BREW2X",
+    color: "from-amber-500 to-amber-600"
+  }
+];
+---
+
+<div class="special-offers-card p-6 sm:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--card-bg)] space-y-6 relative overflow-hidden select-none">
+  <div class="flex items-center justify-between">
+    <div class="space-y-1">
+      <h4 class="text-sm font-bold text-[var(--text-color)] font-display flex items-center gap-2">
+        <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a1.5 1.5 0 0 0 2.122 0l4.317-4.317a1.5 1.5 0 0 0 0-2.122L11.159 4.159A2.25 2.25 0 0 0 9.568 3Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 7.5h.008v.008H6V7.5Z" />
+        </svg>
+        Exclusive Offers & Promos
+      </h4>
+      <p class="text-[10px] text-[var(--text-muted)]">Swipe or click arrows to discover our ongoing chef discounts and happy hour codes.</p>
+    </div>
+    <!-- Arrow controls -->
+    <div class="flex gap-2">
+      <button id="offer-prev-btn" class="p-2 rounded-xl bg-zinc-900 border border-[var(--border-color)] text-[var(--text-color)] hover:bg-zinc-800 transition-colors" aria-label="Previous Offer">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+      </button>
+      <button id="offer-next-btn" class="p-2 rounded-xl bg-zinc-900 border border-[var(--border-color)] text-[var(--text-color)] hover:bg-zinc-800 transition-colors" aria-label="Next Offer">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Promo cards container -->
+  <div class="relative overflow-hidden w-full h-[155px] sm:h-[135px]">
+    <div id="offers-carousel" class="flex gap-4 absolute inset-y-0 transition-transform duration-500 ease-out" style="width: 300%; transform: translateX(0%);">
+      {offers.map((offer, idx) => (
+        <div class="w-full flex-shrink-0 bg-gradient-to-br rounded-2xl p-5 border border-white/5 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 select-text" style={`width: calc(100% / 3 - 8px); background-image: linear-gradient(135deg, ${offer.color.split(' ')[1]} 0%, ${offer.color.split(' ')[3]} 100%);`}>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-white uppercase tracking-wider">{offer.tag}</span>
+              <span class="text-[9px] font-medium text-white/70">Promo Code: <strong class="font-bold underline">{offer.code}</strong></span>
+            </div>
+            <h5 class="text-sm font-bold font-display">{offer.title}</h5>
+            <p class="text-[10px] text-white/80 leading-relaxed max-w-md">{offer.desc}</p>
+          </div>
+          <button onclick={`alert('Promo code ${offer.code} copied! Use this in your table booking notes below for redeeming the offer.');`} class="px-4 py-2 bg-white text-zinc-900 rounded-xl text-[10px] font-bold shadow-md shadow-black/10 hover:bg-zinc-100 transition-all select-none self-stretch sm:self-auto flex items-center justify-center gap-1 flex-shrink-0">
+            Copy Code
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initOffersCarousel() {
+    const prevBtn = document.getElementById('offer-prev-btn');
+    const nextBtn = document.getElementById('offer-next-btn');
+    const carousel = document.getElementById('offers-carousel');
+    if (!prevBtn || !nextBtn || !carousel) return;
+
+    let index = 0;
+    const maxIndex = 2; // 3 slides
+
+    function updateSlide() {
+      carousel.style.transform = `translateX(-${index * (100 / 3.03)}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      index = index > 0 ? index - 1 : maxIndex;
+      updateSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      index = index < maxIndex ? index + 1 : 0;
+      updateSlide();
+    });
+  }
+
+  // Support page loads via transitions
+  initOffersCarousel();
+  document.addEventListener('astro:page-load', initOffersCarousel);
+</script>

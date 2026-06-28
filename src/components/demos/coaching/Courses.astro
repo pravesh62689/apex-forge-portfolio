@@ -1,0 +1,69 @@
+---
+const { tier = "premium" } = Astro.props;
+
+const courses = [
+  {
+    badge: "CBSE",
+    title: "Secondary Boards (9th-10th)",
+    desc: "Focus on science and mathematics foundations. Weekly board-pattern chapter tests and doubt classes."
+  },
+  {
+    badge: "JEE",
+    title: "Engineering Prep (IIT-JEE)",
+    desc: "Advanced physics, chemistry, and math syllabus targeting both Mains & Advanced exams. Daily practice sheets."
+  },
+  {
+    badge: "NEET",
+    title: "Medical Entrance (NEET)",
+    desc: "Biology-focused, conceptual physics, and organic chemistry routines. NCERT-mapped diagnostic tests."
+  },
+  {
+    badge: "VIII",
+    title: "Foundation Batch (8th Grade)",
+    desc: "Building analytic thinking, reasoning foundations, and preparatory olympiad skills early."
+  },
+  {
+    badge: "NTSE",
+    title: "Olympiad & NTSE Prep",
+    desc: "Scholarship exam training focusing on mental ability, logical reasoning, and advanced sciences."
+  },
+  {
+    badge: "CBSE",
+    title: "Senior Boards (12th Science)",
+    desc: "Targeted CBSE board prep focusing on scoring strategies for Physics, Chemistry, and Mathematics."
+  }
+];
+
+const displayCourses = tier === "premium" ? courses : courses.slice(0, 4);
+---
+
+<section id="courses" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-3 font-sans">
+        Courses We Teach
+      </span>
+      <h2 class="text-[clamp(1.75rem,2vw+1rem,2.75rem)] font-extrabold text-themeText mb-4 font-display">
+        Structured Academic Programs
+      </h2>
+      <p class="text-themeTextMuted text-xs sm:text-sm">
+        Curriculum programs designed to build conceptual depth and exam confidence.
+      </p>
+    </div>
+
+    <!-- Course Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto font-sans">
+      {displayCourses.map((course) => (
+        <div class="demo-card bg-ink-900 border border-ink-border p-6 rounded-3xl space-y-4 hover:border-brand-primary/20 hover:-translate-y-0.5 transition-all duration-300">
+          <div class="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xs text-brand-primary font-bold">
+            {course.badge}
+          </div>
+          <h4 class="text-sm font-bold text-themeText font-display">{course.title}</h4>
+          <p class="text-[11px] text-themeTextMuted leading-relaxed">
+            {course.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+/**
+ * VirtualTour.astro — Salon Premium tier
+ * Immersive virtual tour component with interactive hotspots mockup
+ */
+import SectionHeader from '../../ui/SectionHeader.astro';
+---
+
+<section class="py-24 bg-[var(--bg-color)] border-t border-[var(--border-color)]">
+  <div class="max-w-5xl mx-auto px-4">
+    <SectionHeader eyebrow="Virtual Tour" title="Explore Our Space" description="Take a 360° virtual tour of our premium salon facilities, styling areas, and VIP lounge." />
+    
+    <div class="relative rounded-3xl overflow-hidden border border-[var(--border-color)] aspect-video bg-[var(--card-bg)] flex items-center justify-center">
+      <img src="/images/salon-interior.png" alt="Salon interior" class="absolute inset-0 w-full h-full object-cover opacity-60" />
+      
+      <!-- Ambient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
+      
+      <!-- Interactive Hotspots mockups -->
+      <div class="absolute top-[35%] left-[25%] group">
+        <button class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[var(--primary-accent)] text-white shadow-lg animate-ping duration-1000 z-10"></button>
+        <button class="absolute inset-0 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--primary-accent)] text-white shadow-lg font-bold text-sm z-20 hover:scale-110 transition-transform">i</button>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-48 p-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none text-center">
+          <h4 class="text-xs font-bold text-[var(--text-color)]">Styling Stations</h4>
+          <p class="text-[10px] text-[var(--text-muted)] mt-1">Equipped with custom mirrors and lighting to craft perfect cuts.</p>
+        </div>
+      </div>
+
+      <div class="absolute top-[60%] left-[70%] group">
+        <button class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[var(--primary-accent)] text-white shadow-lg animate-ping duration-1000 z-10"></button>
+        <button class="absolute inset-0 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--primary-accent)] text-white shadow-lg font-bold text-sm z-20 hover:scale-110 transition-transform">i</button>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-48 p-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none text-center">
+          <h4 class="text-xs font-bold text-[var(--text-color)]">VIP Lounge</h4>
+          <p class="text-[10px] text-[var(--text-muted)] mt-1">A private space with beverages, curated readings, and zero noise.</p>
+        </div>
+      </div>
+
+      <div class="absolute top-[20%] left-[55%] group">
+        <button class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[var(--primary-accent)] text-white shadow-lg animate-ping duration-1000 z-10"></button>
+        <button class="absolute inset-0 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--primary-accent)] text-white shadow-lg font-bold text-sm z-20 hover:scale-110 transition-transform">i</button>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-48 p-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none text-center">
+          <h4 class="text-xs font-bold text-[var(--text-color)]">Wash & Spa Area</h4>
+          <p class="text-[10px] text-[var(--text-muted)] mt-1">Premium shampoo beds with scalp massage integrations.</p>
+        </div>
+      </div>
+
+      <!-- Play / Direction controller mockup overlay -->
+      <div class="absolute bottom-6 left-6 flex items-center gap-2 p-2 rounded-xl bg-[var(--bg-color)]/80 backdrop-blur-sm border border-[var(--border-color)] text-xs text-[var(--text-color)] font-medium">
+        <svg class="w-4 h-4 text-[var(--primary-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" /></svg>
+        <span>Virtual Tour Active</span>
+      </div>
+    </div>
+  </div>
+</section>

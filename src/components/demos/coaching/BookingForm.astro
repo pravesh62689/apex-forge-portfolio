@@ -1,0 +1,64 @@
+---
+---
+
+<section id="booking" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-xl mx-auto px-4">
+    <div class="bg-ink-900 border border-ink-border rounded-3xl p-8 lg:p-10 shadow-xl space-y-6">
+      <div class="text-center space-y-2">
+        <h3 class="text-xl lg:text-2xl font-bold text-themeText font-display">Book a Free Demo Class</h3>
+        <p class="text-xs text-themeTextMuted">Select a convenient batch time for our upcoming academic trial sessions.</p>
+      </div>
+
+      <!-- Booking Form -->
+      <form id="mock-coaching-form" class="space-y-4 text-xs font-sans" onsubmit="event.preventDefault(); document.getElementById('coaching-success-msg').classList.remove('hidden'); document.getElementById('mock-coaching-form').classList.add('hidden');">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="coach-book-name" class="text-themeTextMuted block font-medium">Student Name</label>
+            <input id="coach-book-name" type="text" required placeholder="Kabir Sharma" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="coach-book-grade" class="text-themeTextMuted block font-medium">Class / Grade</label>
+            <select id="coach-book-grade" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary">
+              <option>Class 9 (CBSE)</option>
+              <option>Class 10 (CBSE)</option>
+              <option>Class 11 (JEE/NEET Prep)</option>
+              <option>Class 12 (JEE/NEET Prep)</option>
+              <option>Class 8 (Foundation)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="coach-book-subject" class="text-themeTextMuted block font-medium">Primary Subject</label>
+            <select id="coach-book-subject" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary">
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Biology</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label for="coach-book-phone" class="text-themeTextMuted block font-medium">Parent Phone</label>
+            <input id="coach-book-phone" type="tel" required placeholder="+91 99999 99999" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-magnetic w-full py-3.5 rounded-xl bg-brand-primary hover:bg-brand-primary/95 text-white font-bold transition-all shadow-md shadow-brand-primary/20">
+          Book Demo Seat
+        </button>
+      </form>
+
+      <!-- Success Screen -->
+      <div id="coaching-success-msg" class="hidden text-center p-6 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 space-y-2">
+        <svg class="w-8 h-8 text-brand-primary mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75c0-1.127-.311-2.183-.852-3.082" /></svg>
+        <span class="text-sm font-bold text-brand-primary block font-display">Demo Registered!</span>
+        <span class="text-[10px] text-themeTextMuted block">We've saved your slot. In a real-world integration, this creates a record in the tuition administrative portal and triggers an SMS reminder to parents.</span>
+        <button onclick="document.getElementById('coaching-success-msg').classList.add('hidden'); document.getElementById('mock-coaching-form').classList.remove('hidden');" class="mt-4 text-[10px] text-brand-primary font-bold hover:underline">
+          Book another slot
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>

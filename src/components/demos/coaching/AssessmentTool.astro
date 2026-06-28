@@ -1,0 +1,188 @@
+---
+/**
+ * AssessmentTool.astro — Premium coaching component
+ * Interactive readiness assessment quiz tool
+ */
+---
+
+<section class="py-24 bg-[var(--bg-color)] border-t border-[var(--border-color)]">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-bold uppercase tracking-wider text-[var(--primary-accent)] block mb-3">Self Assessment</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[var(--text-color)] tracking-tight font-display">Are You Exam Ready?</h2>
+      <p class="text-[var(--text-muted)] text-sm mt-4">Take this quick assessment to understand your preparation level and get a personalized recommendation.</p>
+    </div>
+
+    <div class="bg-[var(--card-bg)] border border-[var(--border-color)] rounded-3xl p-6 md:p-10 relative overflow-hidden" id="assessment-container">
+      <!-- Progress Bar -->
+      <div class="mb-8">
+        <div class="flex justify-between text-xs text-[var(--text-muted)] mb-2">
+          <span id="assessment-progress-text">Question 1 of 5</span>
+          <span id="assessment-percent">0%</span>
+        </div>
+        <div class="h-1.5 bg-[var(--border-color)] rounded-full overflow-hidden">
+          <div id="assessment-bar" class="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div id="assessment-questions">
+        <div class="assessment-q active" data-q="0">
+          <h3 class="text-lg font-bold text-[var(--text-color)] mb-6">How many hours do you study daily outside school/college?</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="1">Less than 2 hours</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="2">2-4 hours</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="3">4-6 hours</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="4">More than 6 hours</button>
+          </div>
+        </div>
+        <div class="assessment-q hidden" data-q="1">
+          <h3 class="text-lg font-bold text-[var(--text-color)] mb-6">Do you follow a structured study timetable?</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="1">No plan at all</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="2">Sometimes follow a rough plan</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="3">Have a timetable, follow most days</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="4">Strict daily schedule with tracking</button>
+          </div>
+        </div>
+        <div class="assessment-q hidden" data-q="2">
+          <h3 class="text-lg font-bold text-[var(--text-color)] mb-6">How often do you take practice tests?</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="1">Never</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="2">Once a month</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="3">Weekly</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="4">Multiple times per week</button>
+          </div>
+        </div>
+        <div class="assessment-q hidden" data-q="3">
+          <h3 class="text-lg font-bold text-[var(--text-color)] mb-6">What's your current confidence level in your weakest subject?</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="1">Very low — I avoid it</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="2">Low — basics are unclear</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="3">Moderate — some topics are clear</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="4">Good — need fine-tuning only</button>
+          </div>
+        </div>
+        <div class="assessment-q hidden" data-q="4">
+          <h3 class="text-lg font-bold text-[var(--text-color)] mb-6">Do you have access to doubt-clearing support?</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="1">No, I struggle alone</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="2">Only from friends/family</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="3">Occasional tutor or online help</button>
+            <button class="assessment-option p-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-color)] text-left text-sm text-[var(--text-color)] hover:border-blue-500/50 transition-all" data-score="4">Regular access to expert mentors</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result (hidden initially) -->
+      <div id="assessment-result" class="hidden text-center py-8 space-y-6">
+        <div class="w-24 h-24 mx-auto rounded-full border-4 border-[var(--primary-accent)] flex items-center justify-center">
+          <span id="result-score" class="text-3xl font-extrabold text-[var(--primary-accent)]">0</span>
+        </div>
+        <div>
+          <h3 id="result-title" class="text-xl font-bold text-[var(--text-color)] font-display"></h3>
+          <p id="result-desc" class="text-sm text-[var(--text-muted)] mt-2 max-w-md mx-auto"></p>
+        </div>
+        <div id="result-recommendation" class="p-5 rounded-2xl border border-blue-500/20 bg-blue-500/5 max-w-md mx-auto">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Recommended Program</span>
+          <p id="result-program" class="text-sm font-bold text-[var(--text-color)]"></p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+          <a href="#prem-c-consult" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 transition-colors">Book Free Counseling</a>
+          <button id="assessment-retry" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-bold border border-[var(--border-color)] text-[var(--text-color)] hover:bg-[var(--card-bg-hover)] transition-colors">Retake Assessment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('astro:page-load', () => {
+  const container = document.getElementById('assessment-container');
+  if (!container) return;
+
+  let currentQ = 0;
+  let totalScore = 0;
+  const totalQuestions = 5;
+
+  const questions = container.querySelectorAll('.assessment-q');
+  const bar = document.getElementById('assessment-bar');
+  const progressText = document.getElementById('assessment-progress-text');
+  const percentText = document.getElementById('assessment-percent');
+  const resultDiv = document.getElementById('assessment-result');
+  const questionsDiv = document.getElementById('assessment-questions');
+
+  container.querySelectorAll('.assessment-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const score = parseInt(btn.getAttribute('data-score') || '0');
+      totalScore += score;
+
+      // Highlight selected
+      const siblings = btn.parentElement?.querySelectorAll('.assessment-option');
+      siblings?.forEach(s => s.classList.remove('border-blue-500', 'bg-blue-500/10'));
+      btn.classList.add('border-blue-500', 'bg-blue-500/10');
+
+      setTimeout(() => {
+        currentQ++;
+        if (currentQ < totalQuestions) {
+          questions.forEach(q => q.classList.add('hidden'));
+          questions[currentQ]?.classList.remove('hidden');
+          const pct = Math.round((currentQ / totalQuestions) * 100);
+          if (bar) bar.style.width = pct + '%';
+          if (progressText) progressText.textContent = `Question ${currentQ + 1} of ${totalQuestions}`;
+          if (percentText) percentText.textContent = pct + '%';
+        } else {
+          showResult();
+        }
+      }, 400);
+    });
+  });
+
+  function showResult() {
+    if (questionsDiv) questionsDiv.classList.add('hidden');
+    if (resultDiv) resultDiv.classList.remove('hidden');
+    if (bar) bar.style.width = '100%';
+    if (percentText) percentText.textContent = '100%';
+    if (progressText) progressText.textContent = 'Assessment Complete';
+
+    const scoreEl = document.getElementById('result-score');
+    const titleEl = document.getElementById('result-title');
+    const descEl = document.getElementById('result-desc');
+    const programEl = document.getElementById('result-program');
+    const pct = Math.round((totalScore / 20) * 100);
+    if (scoreEl) scoreEl.textContent = pct + '%';
+
+    if (pct <= 40) {
+      if (titleEl) titleEl.textContent = 'Foundation Level';
+      if (descEl) descEl.textContent = 'Your preparation needs a structured foundation. With the right guidance and consistent effort, significant improvement is possible within 3-6 months.';
+      if (programEl) programEl.textContent = 'JEE/NEET Foundation Program — Build strong basics with expert mentorship.';
+    } else if (pct <= 65) {
+      if (titleEl) titleEl.textContent = 'Developing Level';
+      if (descEl) descEl.textContent = 'You have some preparation habits in place but need more structure, regular testing, and targeted doubt-clearing to reach your potential.';
+      if (programEl) programEl.textContent = 'JEE Main / NEET Preparation — Structured program with weekly testing.';
+    } else if (pct <= 85) {
+      if (titleEl) titleEl.textContent = 'Advanced Level';
+      if (descEl) descEl.textContent = 'Solid preparation with room for optimization. Focus on mock tests, time management, and subject-specific strategy refinement.';
+      if (programEl) programEl.textContent = 'JEE Advanced Intensive — Fine-tune your approach with expert strategies.';
+    } else {
+      if (titleEl) titleEl.textContent = 'Exam Ready';
+      if (descEl) descEl.textContent = 'Excellent preparation level! Consider our crash course for final polishing or consult with our experts for target-specific strategy.';
+      if (programEl) programEl.textContent = 'Crash Course / Mock Test Series — Final revision and exam simulation.';
+    }
+  }
+
+  document.getElementById('assessment-retry')?.addEventListener('click', () => {
+    currentQ = 0;
+    totalScore = 0;
+    questions.forEach((q, i) => {
+      q.classList.toggle('hidden', i !== 0);
+      q.querySelectorAll('.assessment-option').forEach(o => o.classList.remove('border-blue-500', 'bg-blue-500/10'));
+    });
+    if (questionsDiv) questionsDiv.classList.remove('hidden');
+    if (resultDiv) resultDiv.classList.add('hidden');
+    if (bar) bar.style.width = '0%';
+    if (progressText) progressText.textContent = 'Question 1 of 5';
+    if (percentText) percentText.textContent = '0%';
+  });
+});
+</script>

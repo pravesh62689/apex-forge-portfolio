@@ -1,0 +1,91 @@
+---
+const { tier = "premium" } = Astro.props;
+
+const services = [
+  {
+    title: "General Dentistry",
+    desc: "Comprehensive checkups, digital X-rays, scaling & cleaning, and laser dental fillings.",
+    img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "General Dentistry checkup"
+  },
+  {
+    title: "Root Canal (RCT)",
+    desc: "Microscopic painless root canal treatments completed in single sessions by expert MDS endodontists.",
+    img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Root Canal treatment"
+  },
+  {
+    title: "Smile Makeovers",
+    desc: "Porcelain veneers, cosmetic dental bonding, and medical teeth whitening for healthy smiles.",
+    img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Cosmetic Smile makeover"
+  },
+  {
+    title: "Invisible Aligners",
+    desc: "Custom clear aligners and orthodontic braces to correct teeth alignment comfortably.",
+    img: "https://images.unsplash.com/photo-1579684389782-64d84b5e905d?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Invisible Aligners orthodontic"
+  },
+  {
+    title: "Dental Implants",
+    desc: "Advanced dental implant restoration for stable, long-lasting natural tooth replacement.",
+    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Dental Implants surgery"
+  },
+  {
+    title: "Pediatric Dentistry",
+    desc: "Calm, friendly children's dental sessions focusing on preventative cavity defense.",
+    img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Pediatric Dentist consultation"
+  },
+  {
+    title: "Gum Care & Surgery",
+    desc: "Laser periodontal deep scaling, treatment of bleeding gums, and aesthetic gum contouring.",
+    img: "https://images.unsplash.com/photo-1579684288402-f3d9d784a3c1?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Gum treatment surgery"
+  },
+  {
+    title: "Wisdom Tooth Surgery",
+    desc: "Minimally invasive, painless wisdom tooth extractions under local anesthesia.",
+    img: "https://images.unsplash.com/photo-1512223792601-592a9809eed4?auto=format&fit=crop&w=150&h=150&q=80",
+    alt: "Wisdom tooth extraction"
+  }
+];
+
+const displayServices = tier === "standard" ? services.slice(0, 5) : services;
+---
+
+<section id="treatments" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-wider text-brand-primary block mb-3 font-sans">
+        Clinical Expertise
+      </span>
+      <h2 class="text-[clamp(1.75rem,2vw+1rem,2.75rem)] font-extrabold text-themeText mb-4 font-display">
+        Dental Services We Offer
+      </h2>
+      <p class="text-themeTextMuted text-xs sm:text-sm">
+        Specialist treatments conducted under high clinical precision using advanced tools.
+      </p>
+    </div>
+
+    <!-- Icon Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      {displayServices.map((service) => (
+        <div class="demo-card bg-ink-900 border border-ink-border p-6 rounded-3xl space-y-4 hover:border-brand-primary/20 hover:-translate-y-0.5 transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl overflow-hidden border border-brand-primary/20 bg-ink-950 flex items-center justify-center">
+            <img 
+              src={service.img} 
+              alt={service.alt} 
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <h4 class="text-sm font-bold text-themeText font-display">{service.title}</h4>
+          <p class="text-[11px] text-themeTextMuted leading-relaxed">
+            {service.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

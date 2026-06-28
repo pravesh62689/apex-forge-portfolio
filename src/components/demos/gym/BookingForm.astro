@@ -1,0 +1,57 @@
+---
+---
+
+<section id="booking" class="py-24 border-t border-ink-border bg-ink-950">
+  <div class="max-w-xl mx-auto px-4">
+    <div class="bg-ink-900 border border-ink-border rounded-3xl p-8 lg:p-10 shadow-xl space-y-6">
+      <div class="text-center space-y-2">
+        <h3 class="text-xl lg:text-2xl font-bold text-themeText font-display uppercase tracking-tight">Claim Free 1-Day Trial Pass</h3>
+        <p class="text-xs text-themeTextMuted">Select date, enter details, and receive barcode coupon instantly.</p>
+      </div>
+
+      <!-- Booking Form -->
+      <form id="mock-gym-form" class="space-y-4 text-xs font-sans" onsubmit="event.preventDefault(); document.getElementById('gym-success-msg').classList.remove('hidden'); document.getElementById('mock-gym-form').classList.add('hidden');">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="gym-book-date" class="text-themeTextMuted block font-medium">Select Visit Date</label>
+            <input id="gym-book-date" type="date" required class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="gym-book-time" class="text-themeTextMuted block font-medium">Workout Time</label>
+            <select id="gym-book-time" class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary">
+              <option>Morning (5:00 AM - 10:00 AM)</option>
+              <option>Mid-Day (12:00 PM - 4:00 PM)</option>
+              <option>Evening (5:00 PM - 10:00 PM)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="gym-book-name" class="text-themeTextMuted block font-medium">Your Name</label>
+            <input id="gym-book-name" type="text" placeholder="Deepak Sharma" required class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="gym-book-phone" class="text-themeTextMuted block font-medium">Phone Number</label>
+            <input id="gym-book-phone" type="tel" placeholder="+91 99999 99999" required class="w-full bg-ink-950 border border-ink-border rounded-xl px-3.5 py-2.5 text-themeText focus:outline-none focus:border-brand-primary" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-magnetic w-full py-3.5 rounded-xl bg-brand-primary hover:bg-brand-primary/95 text-white font-bold transition-all shadow-md shadow-brand-primary/20">
+          Generate Trial Coupon
+        </button>
+      </form>
+
+      <!-- Success Screen -->
+      <div id="gym-success-msg" class="hidden text-center p-6 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 space-y-2">
+        <svg class="w-8 h-8 text-brand-primary mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-12h12c1.24 0 2.25 1.01 2.25 2.25v9c0 1.24-1.01 2.25-2.25 2.25H7.5A2.25 2.25 0 0 1 5.25 18V8.25A2.25 2.25 0 0 1 7.5 6Z" /></svg>
+        <span class="text-sm font-bold text-brand-primary block font-display">Trial Coupon Generated!</span>
+        <span class="text-[10px] text-themeTextMuted block">We have created your 1-day pass. In a live client build, this triggers barcode generation and emails it automatically.</span>
+        <button onclick="document.getElementById('gym-success-msg').classList.add('hidden'); document.getElementById('mock-gym-form').classList.remove('hidden');" class="mt-4 text-[10px] text-brand-primary font-bold hover:underline">
+          Generate another pass
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>

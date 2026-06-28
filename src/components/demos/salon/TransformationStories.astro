@@ -1,0 +1,38 @@
+---
+/**
+ * TransformationStories.astro — Salon Premium tier
+ * Before/after transformation stories with visual comparison mockup
+ */
+import SectionHeader from '../../ui/SectionHeader.astro';
+---
+
+<section class="py-24 bg-[var(--card-bg)] border-t border-[var(--border-color)]">
+  <div class="max-w-4xl mx-auto px-4">
+    <SectionHeader eyebrow="Transformations" title="Before & After" description="Real transformations from our styling floor." />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {[
+        { 
+          title: 'Balayage Transformation', 
+          desc: 'From single-tone brassy hair to a smooth dimensional honey balayage with face-framing highlights. 3-hour session.' 
+        },
+        { 
+          title: 'Bridal Makeup Journey', 
+          desc: 'Complete bridal look with pre-consultation, product selection matching the skin tone, and final day-of setting.' 
+        },
+      ].map(story => (
+        <div class="showcase-card p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] space-y-4 hover:border-[var(--primary-accent)]/20 transition-all duration-300">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="h-40 rounded-xl bg-[var(--card-bg)] flex items-center justify-center border border-[var(--border-color)]">
+              <span class="text-xs text-[var(--text-muted)]">Before</span>
+            </div>
+            <div class="h-40 rounded-xl overflow-hidden">
+              <img src="/images/salon-styling.png" alt="After transformation" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <h4 class="text-sm font-bold text-[var(--text-color)] font-display">{story.title}</h4>
+          <p class="text-xs text-[var(--text-muted)]">{story.desc} <span class="text-[9px] opacity-60">(Sample for demo)</span></p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

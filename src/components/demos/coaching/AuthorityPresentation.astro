@@ -1,0 +1,81 @@
+---
+/**
+ * AuthorityPresentation.astro — Premium coaching component
+ * Credentials, methodology, and authority-building content
+ */
+---
+
+<section class="py-24 bg-[var(--card-bg)] border-t border-[var(--border-color)]">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-wider text-[var(--primary-accent)] block mb-3">Why Choose Us</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[var(--text-color)] tracking-tight font-display">Built on Academic Excellence</h2>
+      <p class="text-[var(--text-muted)] text-sm mt-4">Our methodology is designed from years of understanding how students learn, where they struggle, and what produces results.</p>
+    </div>
+
+    <!-- Authority Pillars -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      {[
+        {
+          icon: '<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" /></svg>',
+          title: 'Proven Methodology',
+          desc: 'Concept-first teaching approach. We ensure students understand the "why" behind every formula before memorizing solutions.',
+          stat: '85%',
+          statLabel: 'Student improvement rate in first 3 months',
+        },
+        {
+          icon: '<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>',
+          title: 'Expert Faculty',
+          desc: 'IIT/NIT alumni and experienced educators with proven track records. Personal mentor assigned to every student.',
+          stat: '15+',
+          statLabel: 'Faculty with 10+ years teaching experience',
+        },
+        {
+          icon: '<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>',
+          title: 'Data-Driven Tracking',
+          desc: 'Weekly performance analysis, strength-weakness mapping, and AI-assisted study plan adjustments based on test data.',
+          stat: '50+',
+          statLabel: 'Mock tests per program with detailed analytics',
+        },
+      ].map(pillar => (
+        <div class="showcase-card p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] space-y-4 hover:-translate-y-1 transition-all duration-300">
+          <div class="text-[var(--primary-accent)]" set:html={pillar.icon} />
+          <h4 class="text-base font-bold text-[var(--text-color)]">{pillar.title}</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">{pillar.desc}</p>
+          <div class="pt-4 border-t border-[var(--border-color)]">
+            <span class="text-2xl font-extrabold text-[var(--primary-accent)]">{pillar.stat}</span>
+            <span class="text-[10px] text-[var(--text-muted)] block mt-1">{pillar.statLabel}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Teaching Methodology Timeline -->
+    <div class="max-w-3xl mx-auto">
+      <h3 class="text-xl font-bold text-[var(--text-color)] font-display text-center mb-10">Our Teaching Methodology</h3>
+      <div class="space-y-0">
+        {[
+          { phase: 'Phase 1', title: 'Foundation Building', weeks: 'Weeks 1-8', desc: 'Core concept clarity, NCERT mastery, and baseline assessment. Focus on understanding fundamentals before advancing.' },
+          { phase: 'Phase 2', title: 'Advanced Problem Solving', weeks: 'Weeks 9-20', desc: 'Multi-concept application, timed practice, and previous year paper analysis. Building speed and accuracy together.' },
+          { phase: 'Phase 3', title: 'Test Mastery', weeks: 'Weeks 21-36', desc: 'Full-length mock tests, performance analytics, and exam strategy refinement. Simulated exam conditions weekly.' },
+          { phase: 'Phase 4', title: 'Revision Sprint', weeks: 'Final 4 Weeks', desc: 'Formula sheets, quick revision modules, weak area targeted sessions, and confidence building through past achievements review.' },
+        ].map((step, i) => (
+          <div class="flex gap-6 reveal-item">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-[var(--primary-accent)]/10 border-2 border-[var(--primary-accent)] flex items-center justify-center text-xs font-bold text-[var(--primary-accent)]">{i + 1}</div>
+              {i < 3 && <div class="w-0.5 h-full bg-[var(--border-color)] min-h-[60px]"></div>}
+            </div>
+            <div class="pb-8">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 uppercase">{step.phase}</span>
+                <span class="text-xs text-[var(--text-muted)]">{step.weeks}</span>
+              </div>
+              <h4 class="text-sm font-bold text-[var(--text-color)]">{step.title}</h4>
+              <p class="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

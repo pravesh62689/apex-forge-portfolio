@@ -1,0 +1,109 @@
+---
+const looks = [
+  {
+    title: "Signature Balayage & Blowout",
+    stylist: "By Senior Stylist Ananya",
+    desc: "Seamless hand-painted honey-blonde transitions blended into deep brunette roots, finished with signature soft waves.",
+    img: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
+    tags: ["Balayage", "Coloring", "Blonde"]
+  },
+  {
+    title: "Editorial Precision Bob Cut",
+    stylist: "By Art Director Marc",
+    desc: "Sharp blunt edge geometric bob suited for framing facial features, styled with chrome shine thermal styling spray.",
+    img: "https://images.unsplash.com/photo-1605497746444-ac9dbd39f69c?auto=format&fit=crop&w=600&q=80",
+    tags: ["Precision Cut", "Editorial", "Hairstyling"]
+  },
+  {
+    title: "Chrome Gel Extension Nail Art",
+    stylist: "By Nail Artist Ritu",
+    desc: "Long stiletto gel nail extensions layered with pearl chrome powder and abstract hand-painted metallic gold details.",
+    img: "https://images.unsplash.com/photo-1604654894610-df49068873ae?auto=format&fit=crop&w=600&q=80",
+    tags: ["Gel Nails", "Chrome Art", "Nail Spa"]
+  },
+  {
+    title: "Bridal Airbrush Glow Makeup",
+    stylist: "By MUA Sarah",
+    desc: "Flawless HD airbrush makeup look with a dew-laden skin base, classic rose gold eyes, and premium silk lashes.",
+    img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80",
+    tags: ["Airbrush", "Bridal", "HD Makeup"]
+  }
+];
+---
+
+<div class="lookbook-carousel-card p-6 sm:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--card-bg)] space-y-6">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="space-y-1">
+      <h4 class="text-lg font-bold text-[var(--text-color)] font-display flex items-center gap-2">
+        <svg class="w-5 h-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008H12V8.25Z" />
+        </svg>
+        Nirvana Signature Lookbook
+      </h4>
+      <p class="text-xs text-[var(--text-muted)]">Browse our seasonal transformation catalog showcasing authentic work by our local art directors.</p>
+    </div>
+    <!-- Carousel controls -->
+    <div class="flex gap-2 self-end sm:self-auto">
+      <button id="look-prev-btn" class="p-2.5 rounded-xl bg-zinc-900 border border-[var(--border-color)] text-[var(--text-color)] hover:bg-zinc-800 transition-colors" aria-label="Previous Look">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+      </button>
+      <button id="look-next-btn" class="p-2.5 rounded-xl bg-zinc-900 border border-[var(--border-color)] text-[var(--text-color)] hover:bg-zinc-800 transition-colors" aria-label="Next Look">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="relative overflow-hidden rounded-2xl aspect-[16/10] sm:aspect-[16/8] border border-[var(--border-color)]">
+    <div id="lookbook-carousel" class="flex h-full absolute inset-y-0 transition-transform duration-500 ease-out" style="width: 400%; transform: translateX(0%);">
+      {looks.map((look) => (
+        <div class="w-1/4 h-full flex-shrink-0 relative group">
+          <img src={look.img} alt={look.title} class="w-full h-full object-cover select-none" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          
+          <div class="absolute bottom-6 left-6 right-6 space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {look.tags.map(t => (
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-rose-400/20 text-rose-300 border border-rose-400/30 uppercase">{t}</span>
+              ))}
+            </div>
+            <div class="space-y-1">
+              <h5 class="text-sm sm:text-base font-bold text-white font-display">{look.title}</h5>
+              <p class="text-[10px] text-rose-300/80 font-bold tracking-wide uppercase">{look.stylist}</p>
+              <p class="text-[10px] text-zinc-300 leading-relaxed font-sans max-w-xl">{look.desc}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initLookbookCarousel() {
+    const prevBtn = document.getElementById('look-prev-btn');
+    const nextBtn = document.getElementById('look-next-btn');
+    const carousel = document.getElementById('lookbook-carousel');
+    if (!prevBtn || !nextBtn || !carousel) return;
+
+    let index = 0;
+    const maxIndex = 3; // 4 slides
+
+    function updateSlide() {
+      carousel.style.transform = `translateX(-${index * 25}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      index = index > 0 ? index - 1 : maxIndex;
+      updateSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      index = index < maxIndex ? index + 1 : 0;
+      updateSlide();
+    });
+  }
+
+  // Support page transitions
+  initLookbookCarousel();
+  document.addEventListener('astro:page-load', initLookbookCarousel);
+</script>
