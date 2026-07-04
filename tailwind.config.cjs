@@ -23,6 +23,16 @@ module.exports = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['var(--display-font)', 'Inter', 'system-ui', 'sans-serif'],
       },
+      boxShadow: {
+        'premium-sm': '0 2px 8px -2px rgba(0, 0, 0, 0.12), 0 1px 4px -1px rgba(0, 0, 0, 0.07)',
+        'premium-md': '0 4px 12px -2px rgba(0, 0, 0, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.08)',
+        'premium-lg': '0 12px 32px -4px rgba(0, 0, 0, 0.24), 0 4px 12px -2px rgba(0, 0, 0, 0.12)',
+        'premium-glow': '0 0 40px -10px var(--primary-glow)',
+      },
+      transitionTimingFunction: {
+        'apple-ease': 'cubic-bezier(0.32, 0.72, 0, 1)',
+        'smooth-out': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
     },
   },
   plugins: [],

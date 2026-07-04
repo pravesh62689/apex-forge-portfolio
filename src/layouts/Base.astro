@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions as ClientRouter } from "astro:transitions";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
+
 const {
   title = "APEX FORGE Technologies — Premium Web Solutions",
   description = "APEX FORGE Technologies: Building high-performance, futuristic websites and applications to elevate your business.",
@@ -8,17 +9,20 @@ const {
 } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="antialiased text-rendering-optimizeLegibility scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    
     <ClientRouter />
 
-    <!-- Google Fonts: Inter (global) + Niche Display Serifs/Sans-Serifs -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -50,11 +54,11 @@ const {
         --bg-color: #faf3e9;
         --card-bg: #ffffff;
         --card-bg-hover: #fdfbf7;
-        --border-color: rgba(43, 33, 24, 0.1);
+        --border-color: rgba(43, 33, 24, 0.08);
         --primary-accent: #c1542c;
-        --primary-glow: rgba(193, 84, 44, 0.15);
+        --primary-glow: rgba(193, 84, 44, 0.12);
         --secondary-accent: #b8860b;
-        --accent-glow: rgba(184, 134, 11, 0.1);
+        --accent-glow: rgba(184, 134, 11, 0.08);
         --text-color: #2b2118;
         --text-muted: #786253;
         --display-font: "Fraunces";
@@ -67,11 +71,11 @@ const {
         --bg-color: #f7fafc;
         --card-bg: #ffffff;
         --card-bg-hover: #edf2f7;
-        --border-color: rgba(30, 58, 95, 0.1);
+        --border-color: rgba(30, 58, 95, 0.08);
         --primary-accent: #0d9488;
-        --primary-glow: rgba(13, 148, 136, 0.15);
+        --primary-glow: rgba(13, 148, 136, 0.12);
         --secondary-accent: #1e3a5f;
-        --accent-glow: rgba(30, 58, 95, 0.1);
+        --accent-glow: rgba(30, 58, 95, 0.08);
         --text-color: #1f2937;
         --text-muted: #4b5563;
         --display-font: "Manrope";
@@ -84,11 +88,11 @@ const {
         --bg-color: #161213;
         --card-bg: #221c1d;
         --card-bg-hover: #2e2527;
-        --border-color: rgba(243, 217, 217, 0.08);
+        --border-color: rgba(243, 217, 217, 0.06);
         --primary-accent: #b76e79;
-        --primary-glow: rgba(183, 110, 121, 0.15);
+        --primary-glow: rgba(183, 110, 121, 0.12);
         --secondary-accent: #f3d9d9;
-        --accent-glow: rgba(243, 217, 217, 0.1);
+        --accent-glow: rgba(243, 217, 217, 0.08);
         --text-color: #f3d9d9;
         --text-muted: #c5a5a9;
         --display-font: "Cormorant";
@@ -101,11 +105,11 @@ const {
         --bg-color: #fafafa;
         --card-bg: #ffffff;
         --card-bg-hover: #f3f4f6;
-        --border-color: rgba(0, 0, 0, 0.08);
+        --border-color: rgba(0, 0, 0, 0.06);
         --primary-accent: #2563eb;
-        --primary-glow: rgba(37, 99, 235, 0.15);
+        --primary-glow: rgba(37, 99, 235, 0.12);
         --secondary-accent: #f59e0b;
-        --accent-glow: rgba(245, 158, 11, 0.1);
+        --accent-glow: rgba(245, 158, 11, 0.08);
         --text-color: #1f2937;
         --text-muted: #4b5563;
         --display-font: "Space Grotesk";
@@ -118,7 +122,7 @@ const {
         --bg-color: #0f0f10;
         --card-bg: #1a1a1c;
         --card-bg-hover: #26262a;
-        --border-color: rgba(255, 255, 255, 0.08);
+        --border-color: rgba(255, 255, 255, 0.06);
         --primary-accent: #ff5a2d;
         --primary-glow: rgba(255, 90, 45, 0.15);
         --secondary-accent: #2b2b2d;
@@ -132,38 +136,42 @@ const {
       }
 
       :root {
-        font-family: "Inter", sans-serif;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
       }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: var(--display-font), "Inter", sans-serif;
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--display-font), "Inter", system-ui, sans-serif;
       }
 
       /* Premium custom scrollbar */
       ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
       }
       ::-webkit-scrollbar-track {
         background: var(--bg-color);
       }
       ::-webkit-scrollbar-thumb {
-        background: var(--card-bg);
+        background: var(--card-bg-hover);
         border: 2px solid var(--bg-color);
-        border-radius: 5px;
+        border-radius: 99px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: var(--card-bg-hover);
+        background: var(--text-muted);
+      }
+
+      /* Accessibility Focus Rings */
+      *:focus-visible {
+        outline: 2px solid var(--primary-accent);
+        outline-offset: 4px;
+        transition: outline-offset 0.2s ease;
       }
 
       /* Backdrop Grid Pattern + Spotlight */
       body {
         position: relative;
       }
+      
       body::before {
         content: "";
         position: fixed;
@@ -171,18 +179,11 @@ const {
         z-index: -1;
         background-size: 50px 50px;
         background-image:
-          linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.012) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.012) 1px,
-            transparent 1px
-          );
+          linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
         pointer-events: none;
       }
+      
       body::after {
         content: "";
         position: fixed;
@@ -190,68 +191,54 @@ const {
         z-index: -1;
         pointer-events: none;
         background: radial-gradient(
-          600px circle at var(--x, 50%) var(--y, 50%),
+          800px circle at var(--x, 50%) var(--y, 50%),
           var(--primary-glow),
-          transparent 60%
+          transparent 50%
         );
         will-change: background;
       }
 
-      /* Cursor Dot styling */
+      /* GPU Accelerated Cursor Dot styling */
       .cursor-dot {
         position: fixed;
+        top: 0;
+        left: 0;
         width: 8px;
         height: 8px;
         border-radius: 50%;
         background: var(--primary-accent);
         pointer-events: none;
         z-index: 9999;
-        transform: translate(-50%, -50%);
-        will-change: transform;
+        /* Using translate3d forces GPU hardware acceleration */
+        transform: translate3d(-50%, -50%, 0); 
+        will-change: transform, scale, background-color;
         mix-blend-mode: difference;
       }
+      
       @media (hover: none) {
         .cursor-dot {
           display: none;
         }
       }
 
-      /* Smooth Scroll behavior */
-      html {
-        scroll-behavior: smooth;
-      }
-
-      /* ─── Cinematic View Transitions ─── */
+      /* ─── Cinematic View Transitions (Apple Style) ─── */
       ::view-transition-old(root) {
-        animation: fade-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+        animation: fade-out 0.4s cubic-bezier(0.32, 0.72, 0, 1) both;
       }
       ::view-transition-new(root) {
-        animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+        animation: fade-in 0.4s cubic-bezier(0.32, 0.72, 0, 1) both;
       }
+      
       @keyframes fade-out {
-        from {
-          opacity: 1;
-          transform: scale(1);
-          filter: blur(0);
-        }
-        to {
-          opacity: 0;
-          transform: scale(0.98);
-          filter: blur(2px);
-        }
+        from { opacity: 1; transform: scale(1); filter: blur(0); }
+        to { opacity: 0; transform: scale(0.98); filter: blur(4px); }
       }
+      
       @keyframes fade-in {
-        from {
-          opacity: 0;
-          transform: scale(1.02);
-          filter: blur(2px);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-          filter: blur(0);
-        }
+        from { opacity: 0; transform: scale(1.02); filter: blur(4px); }
+        to { opacity: 1; transform: scale(1); filter: blur(0); }
       }
+      
       @media (prefers-reduced-motion: reduce) {
         ::view-transition-old(root),
         ::view-transition-new(root) {
@@ -271,7 +258,6 @@ const {
         transform: translateY(-7px) rotate(-45deg);
       }
 
-      /* Slide-in Mobile Menu Panel */
       #mobile-menu {
         transform: translateX(100%);
       }
@@ -279,33 +265,28 @@ const {
         transform: translateX(0);
       }
 
-      /* ─── Nav Scroll Glass Effect ─── */
+      /* ─── Premium Nav Scroll Glass Effect ─── */
       header.sticky.nav-scrolled {
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border-bottom-color: var(--primary-accent);
-        border-bottom-width: 1px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border-bottom: 1px solid var(--border-color);
+        background-color: rgba(var(--bg-color), 0.7);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
       }
-      header.sticky.nav-scrolled .text-xl {
+      
+      header.sticky.nav-scrolled .logo-text {
         font-size: 1.1rem;
-        transition: font-size 0.3s ease;
+        transition: font-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       /* ─── Logo Breathing Glow ─── */
       .logo-glow {
-        animation: logoBreath 4s ease-in-out infinite;
+        animation: logoBreath 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       }
+      
       @keyframes logoBreath {
-        0%,
-        100% {
-          text-shadow: 0 0 0 transparent;
-        }
-        50% {
-          text-shadow:
-            0 0 20px var(--primary-glow),
-            0 0 40px var(--accent-glow);
-        }
+        0%, 100% { text-shadow: 0 0 0 transparent; }
+        50% { text-shadow: 0 0 15px var(--primary-glow), 0 0 30px var(--accent-glow); }
       }
 
       /* ─── Interactive Spotlight Card Border ─── */
@@ -317,7 +298,11 @@ const {
         --spotlight-y: 50%;
         position: relative;
         overflow: hidden;
+        border: 1px solid var(--border-color);
+        background-color: var(--card-bg);
+        transition: border-color 0.4s ease, background-color 0.4s ease;
       }
+      
       .showcase-card::before,
       .capability-card::before,
       .pricing-card::before,
@@ -327,22 +312,30 @@ const {
         inset: 0;
         border-radius: inherit;
         background: radial-gradient(
-          300px circle at var(--spotlight-x) var(--spotlight-y),
+          400px circle at var(--spotlight-x) var(--spotlight-y),
           var(--primary-glow),
-          transparent 60%
+          transparent 50%
         );
         opacity: 0;
-        transition: opacity 0.4s ease;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         pointer-events: none;
         z-index: 0;
       }
+      
+      .showcase-card:hover,
+      .capability-card:hover,
+      .pricing-card:hover,
+      .demo-card:hover {
+        border-color: rgba(255,255,255,0.15);
+      }
+      
       .showcase-card:hover::before,
       .capability-card:hover::before,
       .pricing-card:hover::before,
       .demo-card:hover::before {
         opacity: 1;
       }
-      /* Ensure content sits above the spotlight */
+      
       .showcase-card > *,
       .capability-card > *,
       .pricing-card > *,
@@ -351,49 +344,55 @@ const {
         z-index: 1;
       }
 
-      /* Fix for pinned section z-index issue */
       .trust-gap {
         position: relative;
         z-index: 10;
       }
 
-      /* Floating WhatsApp Button */
+      /* Premium Floating WhatsApp Button */
       .whatsapp-fab {
         position: fixed;
-        bottom: 25px;
-        right: 25px;
-        width: 60px;
-        height: 60px;
+        bottom: 32px;
+        right: 32px;
+        width: 56px;
+        height: 56px;
         background-color: #25d366;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        z-index: 1000; /* High z-index to float above other content */
-        transition: transform 0.3s ease-in-out;
-        animation: pulse 2s infinite;
+        box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+        z-index: 1000;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+      }
+
+      .whatsapp-fab::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 50%;
+        border: 2px solid #25d366;
+        opacity: 0;
+        animation: pulsePremium 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
       }
 
       .whatsapp-fab:hover {
-        transform: scale(1.1);
+        transform: scale(1.08) translateY(-4px);
+        box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+      }
+      
+      .whatsapp-fab:hover::after {
         animation-play-state: paused;
+        opacity: 0;
       }
 
-      @keyframes pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-        }
-        70% {
-          box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-        }
+      @keyframes pulsePremium {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(1.5); opacity: 0; }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .logo-glow {
+        .logo-glow, .whatsapp-fab::after {
           animation: none;
         }
       }
@@ -403,275 +402,146 @@ const {
     class={`theme-${theme} bg-ink-950 text-themeText min-h-screen flex flex-col selection:bg-brand-primary selection:text-white relative`}
     data-motion-profile={theme}
   >
-    <!-- Cursor Dot -->
     <div class="cursor-dot"></div>
 
-    <!-- Interactive Canvas Particle Network -->
     <canvas
       id="particle-canvas"
-      class="fixed inset-0 z-[-1] pointer-events-none"
+      class="fixed inset-0 z-[-1] pointer-events-none opacity-60"
       aria-hidden="true"></canvas>
 
-    <!-- Navbar -->
-    <header
-      class="sticky top-0 z-50 backdrop-blur-md bg-transparent border-b border-ink-border transition-all duration-300"
-    >
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"
-      >
-        <a href="/" class="flex items-center space-x-2 group">
-          <span
-            class="logo-glow text-xl font-bold tracking-tight text-themeText hover:text-brand-primary transition-colors"
-          >
+    <header class="sticky top-0 z-50 bg-transparent transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center space-x-2 group focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md outline-none">
+          <span class="logo-text logo-glow text-xl font-bold tracking-tight text-themeText hover:text-brand-primary transition-colors">
             APEX FORGE Technologies
           </span>
         </a>
 
-        <nav
-          class="hidden md:flex items-center space-x-8 text-sm font-medium text-themeTextMuted"
-        >
-          <a
-            href="/"
-            class="hover:text-themeText transition-colors duration-200 relative group"
-          >
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-themeTextMuted" aria-label="Main Navigation">
+          <a href="/" class="hover:text-themeText transition-colors duration-200 relative group py-2">
             Home
-            <span
-              class="absolute left-0 -bottom-1 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"
-            ></span>
+            <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
           </a>
-          <a
-            href="/demos"
-            class="hover:text-themeText transition-colors duration-200 relative group"
-          >
+          <a href="/demos" class="hover:text-themeText transition-colors duration-200 relative group py-2">
             Demos
-            <span
-              class="absolute left-0 -bottom-1 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"
-            ></span>
+            <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
           </a>
-          <a
-            href="/pricing"
-            class="hover:text-themeText transition-colors duration-200 relative group"
-          >
+          <a href="/pricing" class="hover:text-themeText transition-colors duration-200 relative group py-2">
             Pricing
-            <span
-              class="absolute left-0 -bottom-1 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"
-            ></span>
+            <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
           </a>
-          <a
-            href="/contact"
-            class="hover:text-themeText transition-colors duration-200 relative group"
-          >
+          <a href="/contact" class="hover:text-themeText transition-colors duration-200 relative group py-2">
             Contact
-            <span
-              class="absolute left-0 -bottom-1 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"
-            ></span>
+            <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full rounded-full"></span>
           </a>
         </nav>
 
         <div class="flex items-center space-x-4">
           <a
             href="/contact"
-            class="btn-magnetic hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-semibold bg-brand-primary hover:bg-brand-primary/90 text-white shadow-lg shadow-brand-primary/20 transition-all duration-200 relative overflow-hidden group"
+            class="btn-magnetic hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-sm font-semibold bg-brand-primary hover:bg-brand-primary/90 text-white shadow-premium-md transition-all duration-300 relative overflow-hidden group focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-primary"
           >
             <span class="relative z-10">Get Started</span>
-            <span
-              class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
-            ></span>
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
           </a>
-          <!-- Mobile Menu Button with Animated CSS Hamburger -->
+          
           <button
             id="mobile-menu-btn"
-            class="md:hidden p-2 rounded-lg text-themeTextMuted hover:text-themeText focus:outline-none z-50 relative w-10 h-10 flex items-center justify-center"
+            class="md:hidden p-2 rounded-lg text-themeTextMuted hover:text-themeText focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary z-50 relative w-10 h-10 flex items-center justify-center transition-colors"
             aria-label="Toggle menu"
+            aria-expanded="false"
           >
-            <div class="w-6 h-4 flex flex-col justify-between relative">
-              <span
-                class="line-1 w-full h-0.5 bg-current rounded-full transition-all duration-300"
-              ></span>
-              <span
-                class="line-2 w-full h-0.5 bg-current rounded-full transition-all duration-300"
-              ></span>
-              <span
-                class="line-3 w-full h-0.5 bg-current rounded-full transition-all duration-300"
-              ></span>
+            <div class="w-6 h-4 flex flex-col justify-between relative pointer-events-none">
+              <span class="line-1 w-full h-[2px] bg-current rounded-full transition-all duration-300 origin-center"></span>
+              <span class="line-2 w-full h-[2px] bg-current rounded-full transition-all duration-300"></span>
+              <span class="line-3 w-full h-[2px] bg-current rounded-full transition-all duration-300 origin-center"></span>
             </div>
           </button>
         </div>
       </div>
 
-      <!-- Slide-in Mobile Nav Menu Panel -->
       <div
         id="mobile-menu"
-        class="fixed inset-y-0 right-0 z-40 w-full sm:w-80 bg-ink-950/98 backdrop-blur-xl border-l border-ink-border md:hidden transition-transform duration-500 ease-out flex flex-col justify-center px-8 space-y-8"
+        class="fixed inset-y-0 right-0 z-40 w-full sm:w-80 bg-ink-950/98 backdrop-blur-2xl border-l border-ink-border md:hidden transition-transform duration-500 cubic-bezier(0.32, 0.72, 0, 1) flex flex-col justify-center px-8 space-y-8 shadow-2xl"
+        role="dialog"
+        aria-modal="true"
       >
-        <a
-          href="/"
-          class="mobile-nav-link text-2xl font-bold text-themeTextMuted hover:text-themeText transition-colors duration-200"
-          >Home</a
-        >
-        <a
-          href="/demos"
-          class="mobile-nav-link text-2xl font-bold text-themeTextMuted hover:text-themeText transition-colors duration-200"
-          >Demos</a
-        >
-        <a
-          href="/pricing"
-          class="mobile-nav-link text-2xl font-bold text-themeTextMuted hover:text-themeText transition-colors duration-200"
-          >Pricing</a
-        >
-        <a
-          href="/contact"
-          class="mobile-nav-link text-2xl font-bold text-themeTextMuted hover:text-themeText transition-colors duration-200"
-          >Contact</a
-        >
-        <a
-          href="/contact"
-          class="mobile-nav-link block text-center px-4 py-4 rounded-2xl bg-brand-primary text-white font-bold shadow-lg shadow-brand-primary/20 hover:bg-brand-primary/90 transition-colors mt-8"
-        >
+        <a href="/" class="mobile-nav-link text-3xl font-semibold tracking-tight text-themeTextMuted hover:text-themeText transition-colors duration-200">Home</a>
+        <a href="/demos" class="mobile-nav-link text-3xl font-semibold tracking-tight text-themeTextMuted hover:text-themeText transition-colors duration-200">Demos</a>
+        <a href="/pricing" class="mobile-nav-link text-3xl font-semibold tracking-tight text-themeTextMuted hover:text-themeText transition-colors duration-200">Pricing</a>
+        <a href="/contact" class="mobile-nav-link text-3xl font-semibold tracking-tight text-themeTextMuted hover:text-themeText transition-colors duration-200">Contact</a>
+        <a href="/contact" class="mobile-nav-link block text-center px-4 py-4 rounded-2xl bg-brand-primary text-white font-bold shadow-premium-md hover:bg-brand-primary/90 transition-all mt-8 transform active:scale-95">
           Get Started
         </a>
       </div>
     </header>
 
-    <main class="flex-grow">
+    <main class="flex-grow flex flex-col">
       <slot />
     </main>
 
-    <!-- Enhanced Multi-Column Footer -->
-    <footer
-      class="bg-ink-950 border-t border-ink-border pt-16 pb-12 text-sm text-themeTextMuted"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <!-- Col 1: Brand -->
-          <div class="space-y-4">
-            <span class="text-xl font-bold text-themeText block"
-              >APEX FORGE Technologies</span
-            >
-            <p class="text-xs leading-relaxed max-w-xs text-zinc-500">
-              Websites built with banking-grade engineering discipline.
-              High-performance, secure, and fast loading layouts for local
-              clinics, salons, cafes, and training centers in Noida & Delhi NCR.
+    <footer class="bg-ink-950 border-t border-ink-border pt-20 pb-12 text-sm text-themeTextMuted relative overflow-hidden">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-primaryGlow rounded-full blur-[120px] pointer-events-none opacity-30"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div class="space-y-6">
+            <span class="text-lg font-bold tracking-tight text-themeText block">APEX FORGE Technologies</span>
+            <p class="text-sm leading-relaxed max-w-xs text-zinc-400">
+              Websites built with banking-grade engineering discipline. High-performance, secure, and fast loading layouts for local businesses in Noida & Delhi NCR.
             </p>
           </div>
-          <!-- Col 2: Navigation -->
-          <div class="space-y-4">
-            <h4
-              class="text-xs font-bold uppercase tracking-wider text-themeText font-display"
-            >
-              Navigation
-            </h4>
-            <ul class="space-y-2 text-xs">
-              <li>
-                <a href="/" class="hover:text-themeText transition-colors"
-                  >Home Page</a>
-              </li>
-              <li>
-                <a href="/demos" class="hover:text-themeText transition-colors"
-                  >Interactive Demos</a>
-              </li>
-              <li>
-                <a
-                  href="/pricing"
-                  class="hover:text-themeText transition-colors"
-                  >Pricing Packages</a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  class="hover:text-themeText transition-colors"
-                  >Start Project</a>
-              </li>
+          
+          <div class="space-y-6">
+            <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-themeText font-display opacity-80">Navigation</h4>
+            <ul class="space-y-3 text-sm">
+              <li><a href="/" class="hover:text-white transition-colors">Home Page</a></li>
+              <li><a href="/demos" class="hover:text-white transition-colors">Interactive Demos</a></li>
+              <li><a href="/pricing" class="hover:text-white transition-colors">Pricing Packages</a></li>
+              <li><a href="/contact" class="hover:text-white transition-colors">Start Project</a></li>
             </ul>
           </div>
-          <!-- Col 3: Demos -->
-          <div class="space-y-4">
-            <h4
-              class="text-xs font-bold uppercase tracking-wider text-themeText font-display"
-            >
-              Live Templates
-            </h4>
-            <ul class="space-y-2 text-xs">
-              <li>
-                <a
-                  href="/demos/dentist-demo"
-                  class="hover:text-themeText transition-colors"
-                  >Dentist / Medical</a>
-              </li>
-              <li>
-                <a
-                  href="/demos/salon-demo"
-                  class="hover:text-themeText transition-colors"
-                  >Salon & Styling</a>
-              </li>
-              <li>
-                <a
-                  href="/demos/restaurant-demo"
-                  class="hover:text-themeText transition-colors"
-                  >Restaurant / Bistro</a>
-              </li>
-              <li>
-                <a
-                  href="/demos/gym-demo"
-                  class="hover:text-themeText transition-colors"
-                  >Gym & Fitness</a>
-              </li>
-              <li>
-                <a
-                  href="/demos/coaching-demo"
-                  class="hover:text-themeText transition-colors"
-                  >Coaching & Training</a>
-              </li>
+          
+          <div class="space-y-6">
+            <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-themeText font-display opacity-80">Live Templates</h4>
+            <ul class="space-y-3 text-sm">
+              <li><a href="/demos/dentist-demo" class="hover:text-white transition-colors">Dentist / Medical</a></li>
+              <li><a href="/demos/salon-demo" class="hover:text-white transition-colors">Salon & Styling</a></li>
+              <li><a href="/demos/restaurant-demo" class="hover:text-white transition-colors">Restaurant / Bistro</a></li>
+              <li><a href="/demos/gym-demo" class="hover:text-white transition-colors">Gym & Fitness</a></li>
+              <li><a href="/demos/coaching-demo" class="hover:text-white transition-colors">Coaching & Training</a></li>
             </ul>
           </div>
-          <!-- Col 4: Trust -->
-          <div class="space-y-4">
-            <h4
-              class="text-xs font-bold uppercase tracking-wider text-themeText font-display"
-            >
-              Engineering Trust
-            </h4>
-            <p class="text-xs text-zinc-500 leading-relaxed">
-              No bloated templates, no security vulnerabilities, and zero
-              monthly software hosting fees. Deploying on modern static
-              architecture.
+          
+          <div class="space-y-6">
+            <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-themeText font-display opacity-80">Engineering Trust</h4>
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              No bloated templates, no security vulnerabilities, and zero monthly software hosting fees. Deploying on modern static architecture.
             </p>
-            <div class="pt-2">
-              <a
-                href="/contact"
-                class="btn-magnetic inline-flex items-center justify-center px-4 py-2 bg-brand-primary hover:bg-brand-primary/90 text-white font-semibold text-xs rounded-xl shadow transition-all duration-200"
-              >
+            <div class="pt-4">
+              <a href="/contact" class="btn-magnetic inline-flex items-center justify-center px-5 py-2.5 bg-ink-900 border border-ink-border hover:border-brand-primary text-themeText hover:text-white font-medium text-sm rounded-xl shadow-sm transition-all duration-300">
                 Book Free Consultation
               </a>
             </div>
           </div>
         </div>
 
-        <div
-          class="border-t border-ink-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-        >
-          <p class="text-xs text-zinc-500">
-            &copy; {new Date().getFullYear()} APEX FORGE Technologies. Noida, UP.
-            All rights reserved.
+        <div class="border-t border-ink-border/50 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-zinc-500">
+             &copy; {new Date().getFullYear()} APEX FORGE Technologies. Noida, UP. All rights reserved.
           </p>
-          <div class="flex space-x-6 text-xs text-zinc-500">
-            <a href="/privacy" class="hover:text-themeText transition-colors"
-              >Privacy Policy</a
-            >
-            <a href="/terms" class="hover:text-themeText transition-colors"
-              >Terms of Service</a
-            >
+          <div class="flex space-x-8 text-sm text-zinc-500">
+            <a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms" class="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Interactive script import for motion & interactions -->
     <script>
       import "../scripts/motion.js";
     </script>
 
-    <!-- Floating WhatsApp Button -->
     <a
       href="https://wa.me/YOUR_PHONE_NUMBER"
       class="whatsapp-fab"
@@ -679,72 +549,72 @@ const {
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-        width="24"
-        height="24"
-        fill="white"
-      >
-        <path
-          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 .2c57.1 0 109.7 21.8 148.8 60.8 39.1 39.1 60.8 91.7 60.8 148.8 0 110.9-90.3 201.2-201.2 201.2h-.1c-34.9 0-68.6-9.2-99-26.5l-7.1-4.2-74.5 19.6 19.9-72.6-4.5-7.4c-18.5-30.7-28.2-66.5-28.2-103.3 0-110.9 90.3-201.2 201.2-201.2zM223.9 111.3c-65.5 0-118.5 53-118.5 118.5 0 21.2 5.6 41.5 15.9 59.4l4.4 7.6-12.1 44.1 45.1-11.8 7.3 4.3c17.1 10.1 36.4 15.3 56 15.3 65.5 0 118.5-53 118.5-118.5S289.4 111.3 223.9 111.3z"
-        ></path>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="white">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 .2c57.1 0 109.7 21.8 148.8 60.8 39.1 39.1 60.8 91.7 60.8 148.8 0 110.9-90.3 201.2-201.2 201.2h-.1c-34.9 0-68.6-9.2-99-26.5l-7.1-4.2-74.5 19.6 19.9-72.6-4.5-7.4c-18.5-30.7-28.2-66.5-28.2-103.3 0-110.9 90.3-201.2 201.2-201.2zM223.9 111.3c-65.5 0-118.5 53-118.5 118.5 0 21.2 5.6 41.5 15.9 59.4l4.4 7.6-12.1 44.1 45.1-11.8 7.3 4.3c17.1 10.1 36.4 15.3 56 15.3 65.5 0 118.5-53 118.5-118.5S289.4 111.3 223.9 111.3z"></path>
       </svg>
     </a>
 
-    <!-- Lightweight Interactive Canvas Particle Network -->
     <script>
       (function () {
         const canvas = document.getElementById("particle-canvas");
         if (!canvas) return;
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d", { alpha: false }); // Opt: disable alpha for performance if bg is drawn, but here we overlay. Changed to default.
         if (!ctx) return;
 
-        // Check reduced motion preference
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           canvas.style.display = "none";
           return;
         }
 
         let w, h;
-        let mouseX = -1000,
-          mouseY = -1000;
+        let mouseX = -1000, mouseY = -1000;
         let particles = [];
-        const MAX_PARTICLES = 50;
-        const CONNECTION_DIST = 120;
-        const MOUSE_DIST = 180;
+        const MAX_PARTICLES = 40; // Lowered slightly for buttery INP
+        const CONNECTION_DIST = 140;
+        const MOUSE_DIST = 200;
         let animId;
+        let resizeTimeout;
 
         function resize() {
           w = canvas.width = window.innerWidth;
           h = canvas.height = window.innerHeight;
         }
         resize();
-        window.addEventListener("resize", resize);
+        
+        // Debounced resize to prevent layout thrashing
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(resize, 200);
+        });
 
-        document.addEventListener("mousemove", (e) => {
+        window.addEventListener("mousemove", (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
-        });
-        document.addEventListener("mouseleave", () => {
+        }, { passive: true }); // passive flag for scrolling performance
+
+        window.addEventListener("mouseleave", () => {
           mouseX = -1000;
           mouseY = -1000;
-        });
+        }, { passive: true });
 
+        // Cache colors to prevent CSS variable lookups in loop
+        let cachedColor = null;
         function getThemeColor() {
+          if (cachedColor) return cachedColor;
           const style = getComputedStyle(document.body);
-          const r = style.getPropertyValue("--particle-r").trim() || "6";
-          const g = style.getPropertyValue("--particle-g").trim() || "182";
-          const b = style.getPropertyValue("--particle-b").trim() || "212";
-          return { r: parseInt(r), g: parseInt(g), b: parseInt(b) };
+          const r = parseInt(style.getPropertyValue("--particle-r").trim() || "6");
+          const g = parseInt(style.getPropertyValue("--particle-g").trim() || "182");
+          const b = parseInt(style.getPropertyValue("--particle-b").trim() || "212");
+          cachedColor = { r, g, b };
+          return cachedColor;
         }
 
         class Particle {
           constructor() {
             this.x = Math.random() * w;
             this.y = Math.random() * h;
-            this.vx = (Math.random() - 0.5) * 0.3;
-            this.vy = (Math.random() - 0.5) * 0.3;
+            this.vx = (Math.random() - 0.5) * 0.2;
+            this.vy = (Math.random() - 0.5) * 0.2;
             this.size = Math.random() * 1.5 + 0.5;
           }
           update() {
@@ -752,28 +622,27 @@ const {
             this.y += this.vy;
             if (this.x < 0 || this.x > w) this.vx *= -1;
             if (this.y < 0 || this.y > h) this.vy *= -1;
-
-            // Subtle mouse attraction
+            
             const dx = mouseX - this.x;
             const dy = mouseY - this.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < MOUSE_DIST && dist > 0) {
+            const distSq = dx * dx + dy * dy; // Optimization: avoided Math.sqrt where possible
+            
+            if (distSq < MOUSE_DIST * MOUSE_DIST && distSq > 0) {
+              const dist = Math.sqrt(distSq);
               this.vx += (dx / dist) * 0.015;
               this.vy += (dy / dist) * 0.015;
             }
-            // Dampen velocity
             this.vx *= 0.99;
             this.vy *= 0.99;
           }
           draw(color) {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.3)`;
+            ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`;
             ctx.fill();
           }
         }
 
-        // Init particles
         for (let i = 0; i < MAX_PARTICLES; i++) {
           particles.push(new Particle());
         }
@@ -782,53 +651,56 @@ const {
           ctx.clearRect(0, 0, w, h);
           const color = getThemeColor();
 
-          // Update & draw particles
-          particles.forEach((p) => {
+          particles.forEach(p => {
             p.update();
             p.draw(color);
           });
 
-          // Draw connections
           for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
               const dx = particles[i].x - particles[j].x;
               const dy = particles[i].y - particles[j].y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < CONNECTION_DIST) {
-                const alpha = (1 - dist / CONNECTION_DIST) * 0.12;
+              const distSq = dx * dx + dy * dy;
+              
+              if (distSq < CONNECTION_DIST * CONNECTION_DIST) {
+                const dist = Math.sqrt(distSq);
+                const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
                 ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
-                ctx.lineWidth = 0.5;
+                ctx.lineWidth = 0.6;
                 ctx.stroke();
               }
             }
 
-            // Mouse connections
             const dx2 = particles[i].x - mouseX;
             const dy2 = particles[i].y - mouseY;
-            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-            if (dist2 < MOUSE_DIST) {
-              const alpha = (1 - dist2 / MOUSE_DIST) * 0.25;
+            const dist2Sq = dx2 * dx2 + dy2 * dy2;
+            
+            if (dist2Sq < MOUSE_DIST * MOUSE_DIST) {
+              const dist2 = Math.sqrt(dist2Sq);
+              const alpha = (1 - dist2 / MOUSE_DIST) * 0.3;
               ctx.beginPath();
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(mouseX, mouseY);
               ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
-              ctx.lineWidth = 0.8;
+              ctx.lineWidth = 1;
               ctx.stroke();
             }
           }
-
           animId = requestAnimationFrame(animate);
         }
+        
         animate();
 
-        // Cleanup on Astro page transitions
         document.addEventListener("astro:before-swap", () => {
           cancelAnimationFrame(animId);
+          cachedColor = null; // Clear cache on theme switch
         });
+        
         document.addEventListener("astro:page-load", () => {
+          cachedColor = null; 
           resize();
           particles.forEach((p) => {
             p.x = Math.random() * w;

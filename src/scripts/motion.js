@@ -7,19 +7,20 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Upgraded to premium easing curves (Apple/Stripe feel)
 const motionProfiles = {
-  restaurant: { duration: 0.8, ease: 'power1.out', stagger: 0.06 },
-  dental: { duration: 0.5, ease: 'power2.out', stagger: 0.05 },
-  salon: { duration: 0.9, ease: 'power1.inOut', stagger: 0.07 },
-  coaching: { duration: 0.5, ease: 'power3.out', stagger: 0.04 },
-  gym: { duration: 0.35, ease: 'back.out(1.4)', stagger: 0.03 },
-  shell: { duration: 0.6, ease: 'power3.out', stagger: 0.05 },
+  restaurant: { duration: 1.0, ease: 'expo.out', stagger: 0.06 },
+  dental: { duration: 0.8, ease: 'power3.out', stagger: 0.05 },
+  salon: { duration: 1.1, ease: 'power2.inOut', stagger: 0.07 },
+  coaching: { duration: 0.8, ease: 'expo.out', stagger: 0.04 },
+  gym: { duration: 0.6, ease: 'back.out(1.2)', stagger: 0.03 },
+  shell: { duration: 0.9, ease: 'expo.out', stagger: 0.05 },
 };
 
 const tierMotionProfiles = {
-  premium: { duration: 1.0, ease: 'power3.inOut', y: 50, scale: 0.97, stagger: 0.08 },
-  standard: { duration: 0.6, ease: 'power2.out', y: 30, scale: 1, stagger: 0.05 },
-  basic: { duration: 0.35, ease: 'power1.out', y: 15, scale: 1, stagger: 0.03 },
+  premium: { duration: 1.2, ease: 'expo.out', y: 40, scale: 0.98, stagger: 0.08 },
+  standard: { duration: 0.8, ease: 'power3.out', y: 20, scale: 1, stagger: 0.05 },
+  basic: { duration: 0.5, ease: 'power2.out', y: 10, scale: 1, stagger: 0.03 },
 };
 
 let lenis = null;
@@ -49,15 +50,12 @@ function safeKillScrollTriggers() {
   ScrollTrigger.clearMatchMedia?.();
 }
 
-// -------- splitIntoLines – now applies initial state immediately --------
 function splitIntoLines(el, singleWordLines = false) {
   if (!el) return [];
   const text = (el.textContent || '').trim();
   if (!text) return [];
 
-  // Check if we already processed this element (prevent duplicate rebuilds)
   if (el.dataset.splitDone) {
-    // Return the existing line inner spans
     const lineWraps = el.querySelectorAll('span > span');
     return Array.from(lineWraps);
   }
@@ -105,10 +103,10 @@ function splitIntoLines(el, singleWordLines = false) {
 
     const inner = document.createElement('span');
     inner.style.display = 'inline-block';
-    inner.style.willChange = 'transform, opacity';
-    // **FIX: set initial state immediately to avoid flash**
+    inner.style.willChange = 'transform, opacity, filter';
     inner.style.transform = 'translateY(110%)';
     inner.style.opacity = '0';
+    inner.style.filter = 'blur(8px)';
     inner.textContent = wordGroup.map(s => s.textContent).join('').trim();
     lineWrap.appendChild(inner);
     el.appendChild(lineWrap);
@@ -127,7 +125,7 @@ function splitIntoChars(el) {
   for (const char of text) {
     const span = document.createElement('span');
     span.style.display = 'inline-block';
-    span.style.willChange = 'transform, opacity';
+    span.style.willChange = 'transform, opacity, filter';
     span.textContent = char === ' ' ? '\u00A0' : char;
     el.appendChild(span);
     chars.push(span);
@@ -146,7 +144,7 @@ function createLenis() {
   if (prefersReduced) return;
   destroyLenis();
   lenis = new Lenis({
-    lerp: 0.07,
+    lerp: 0.08, // Slightly tighter for a premium feel
     smoothWheel: true,
     syncTouch: false,
   });
@@ -191,23 +189,34 @@ function clearHandlers() {
   cleanupFns = [];
 }
 
-// -------- INIT FUNCTIONS (all wrapped in try/catch) --------
 function initPointerEffects() {
   if (prefersReduced) return;
   const cursor = document.querySelector('.cursor-dot');
   if (!cursor) return;
 
+  // Optimized pointer tracking with requestAnimationFrame internally handled by GSAP
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+
   currentMouseMoveHandler = (e) => {
-    document.documentElement.style.setProperty('--x', `${e.clientX}px`);
-    document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    document.documentElement.style.setProperty('--x', `${mouseX}px`);
+    document.documentElement.style.setProperty('--y', `${mouseY}px`);
     if (window.matchMedia('(hover: hover)').matches) {
-      gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.08, ease: 'power2.out', overwrite: 'auto' });
+      gsap.to(cursor, {
+        x: mouseX,
+        y: mouseY,
+        duration: 0.15,
+        ease: 'expo.out',
+        overwrite: 'auto'
+      });
     }
   };
   window.addEventListener('mousemove', currentMouseMoveHandler, { passive: true });
 
-  const hide = () => { cursor.style.opacity = '0'; };
-  const show = () => { cursor.style.opacity = '1'; };
+  const hide = () => gsap.to(cursor, { opacity: 0, duration: 0.3 });
+  const show = () => gsap.to(cursor, { opacity: 1, duration: 0.3 });
   document.addEventListener('mouseleave', hide);
   document.addEventListener('mouseenter', show);
   cleanupFns.push(() => {
@@ -217,8 +226,8 @@ function initPointerEffects() {
 
   const hoverables = document.querySelectorAll('a, button, input, select, textarea, [role="button"], .btn-magnetic');
   hoverables.forEach(el => {
-    const enter = () => gsap.to(cursor, { scale: 3, backgroundColor: '#10B981', duration: 0.2, overwrite: 'auto' });
-    const leave = () => gsap.to(cursor, { scale: 1, backgroundColor: '#6366F1', duration: 0.2, overwrite: 'auto' });
+    const enter = () => gsap.to(cursor, { scale: 3, backgroundColor: 'var(--primary-accent)', duration: 0.3, ease: 'expo.out', overwrite: 'auto' });
+    const leave = () => gsap.to(cursor, { scale: 1, backgroundColor: 'var(--primary-accent)', duration: 0.3, ease: 'expo.out', overwrite: 'auto' });
     el.addEventListener('mouseenter', enter);
     el.addEventListener('mouseleave', leave);
     currentHoverHandlers.push({ el, enter, leave });
@@ -238,33 +247,32 @@ function initHeroEntrance() {
 
   const tl = gsap.timeline();
 
-  if (bg) tl.fromTo(bg, { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, 0);
-  if (particles) tl.fromTo(particles, { opacity: 0 }, { opacity: 0.22, duration: 1.2, ease: 'power1.out' }, 0.2);
-  if (eyebrow) tl.fromTo(eyebrow, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.25);
+  if (bg) tl.fromTo(bg, { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power2.out' }, 0);
+  if (particles) tl.fromTo(particles, { opacity: 0 }, { opacity: 0.25, duration: 1.5, ease: 'power1.out' }, 0.2);
+  if (eyebrow) tl.fromTo(eyebrow, { opacity: 0, y: 15, filter: 'blur(4px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.0, ease: 'expo.out' }, 0.25);
 
   if (headline) {
-    // If we have line spans already (with inline styles), just animate them
     const lineInners = splitIntoLines(headline, true);
     if (lineInners.length) {
       tl.to(lineInners, {
         y: '0%',
         opacity: 1,
-        duration: 0.9,
+        filter: 'blur(0px)',
+        duration: 1.2,
         stagger: 0.08,
-        ease: 'power4.out',
+        ease: 'expo.out',
         overwrite: 'auto',
-      }, 0.4);
+      }, 0.3);
     } else {
-      // fallback to SplitText
       const split = SplitText.create(headline, { type: 'chars' });
-      tl.fromTo(split.chars, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.02, ease: 'power3.out' }, 0.4);
+      tl.fromTo(split.chars, { y: 40, opacity: 0, filter: 'blur(8px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, stagger: 0.02, ease: 'expo.out' }, 0.3);
       cleanupFns.push(() => split.revert?.());
     }
   }
 
-  if (subtitle) tl.fromTo(subtitle, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.6);
-  if (ctas) tl.fromTo(ctas, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.75);
-  if (ambients.length) tl.fromTo(ambients, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.7, stagger: 0.15, ease: 'back.out(1.2)' }, 0.9);
+  if (subtitle) tl.fromTo(subtitle, { opacity: 0, y: 20, filter: 'blur(4px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.0, ease: 'expo.out' }, 0.5);
+  if (ctas) tl.fromTo(ctas, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.0, ease: 'expo.out' }, 0.65);
+  if (ambients.length) tl.fromTo(ambients, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.2, stagger: 0.15, ease: 'expo.out' }, 0.8);
 
   cleanupFns.push(() => tl.kill());
 }
@@ -291,17 +299,21 @@ function initCardReveals() {
 
   groups.forEach(group => {
     const tierProfile = getElementTierProfile(group[0]);
+    // Added a slight blur filter reveal for a premium feel
+    gsap.set(group, { y: tierProfile.y, opacity: 0, scale: tierProfile.scale, filter: 'blur(8px)' });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: group[0],
-        start: 'top 88%',
+        start: 'top 90%',
         once: true,
       },
     });
-    tl.from(group, {
-      y: tierProfile.y,
-      opacity: 0,
-      scale: tierProfile.scale,
+    tl.to(group, {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      filter: 'blur(0px)',
       duration: tierProfile.duration,
       stagger: tierProfile.stagger,
       ease: tierProfile.ease,
@@ -314,24 +326,25 @@ function initSectionHeaderReveals() {
   if (prefersReduced) return;
   const headers = gsap.utils.toArray('section > div > div:first-child');
   headers.forEach(header => {
-    const eyebrow = header.querySelector('span');
-    const title = header.querySelector('h2, h3');
-    const desc = header.querySelector('p');
-    const elements = [eyebrow, title, desc].filter(Boolean);
+    const elements = Array.from(header.querySelectorAll('span, h2, h3, p')).filter(Boolean);
     if (!elements.length) return;
 
-    gsap.from(elements, {
-      scrollTrigger: {
-        trigger: header,
-        start: 'top 85%',
-        once: true,
-      },
-      y: 25,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: 'power2.out',
-    });
+    gsap.fromTo(elements,
+      { y: 30, opacity: 0, filter: 'blur(5px)' },
+      {
+        scrollTrigger: {
+          trigger: header,
+          start: 'top 85%',
+          once: true,
+        },
+        y: 0,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 1.0,
+        stagger: 0.1,
+        ease: 'expo.out',
+      }
+    );
   });
 }
 
@@ -350,8 +363,8 @@ function initTrustGap() {
       },
     });
 
-    tl.from('.trust-gap .without-col', { xPercent: -40, opacity: 0, duration: 1 })
-      .from('.trust-gap .with-col', { xPercent: 40, opacity: 0, duration: 1 }, '<');
+    tl.from('.trust-gap .without-col', { xPercent: -40, opacity: 0, duration: 1, ease: 'none' })
+      .from('.trust-gap .with-col', { xPercent: 40, opacity: 0, duration: 1, ease: 'none' }, '<');
 
     cleanupFns.push(() => tl.kill());
   });
@@ -364,9 +377,9 @@ function initMagneticButtons() {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
+      gsap.to(btn, { x: x * 0.25, y: y * 0.25, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
     };
-    const leave = () => gsap.to(btn, { x: 0, y: 0, duration: 0.45, ease: 'elastic.out(1, 0.3)', overwrite: 'auto' });
+    const leave = () => gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)', overwrite: 'auto' });
     btn.addEventListener('mousemove', move);
     btn.addEventListener('mouseleave', leave);
     currentHoverHandlers.push({ el: btn, enter: move, leave });
@@ -383,14 +396,16 @@ function initMobileMenu() {
     btn.classList.toggle('active');
     document.body.style.overflow = isOpen ? 'hidden' : '';
     if (isOpen && !prefersReduced) {
-      gsap.fromTo('.mobile-nav-link', { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, stagger: 0.06, ease: 'power2.out' });
+      gsap.fromTo('.mobile-nav-link',
+        { x: 40, opacity: 0, filter: 'blur(4px)' },
+        { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.5, stagger: 0.08, ease: 'expo.out' }
+      );
     }
   };
 
   btn.addEventListener('click', currentMenuToggleHandler);
 }
 
-// -------- TAB SWITCHING (fixed for "moderate" / "standard" mismatch) --------
 function setTabState(container, activeBtn) {
   container.querySelectorAll('.tier-tab-btn').forEach(b => {
     const isActive = b === activeBtn;
@@ -406,19 +421,15 @@ function setTabState(container, activeBtn) {
 }
 
 function switchTierBlock(target) {
-  // Normalize: if target is 'moderate', treat as 'standard'
   const normalizedTarget = target === 'moderate' ? 'standard' : target;
-
   const blocks = document.querySelectorAll('.tier-content-block');
   let currentBlock = null;
   let targetBlock = document.getElementById(`tier-${normalizedTarget}-content`);
 
-  // If no block found with normalized id, try the raw target id (fallback)
   if (!targetBlock) {
     targetBlock = document.getElementById(`tier-${target}-content`);
   }
 
-  // Also find the currently visible block (not hidden)
   blocks.forEach(block => {
     if (!block.classList.contains('hidden')) currentBlock = block;
   });
@@ -437,25 +448,28 @@ function switchTierBlock(target) {
   if (currentBlock) {
     gsap.to(currentBlock, {
       opacity: 0,
-      y: -12,
-      duration: 0.2,
-      ease: 'power1.in',
+      y: -15,
+      filter: 'blur(4px)',
+      duration: 0.3,
+      ease: 'power2.in',
       onComplete: () => {
         currentBlock.classList.add('hidden');
         currentBlock.classList.remove('block');
-        gsap.set(currentBlock, { opacity: 1, y: 0 });
+        gsap.set(currentBlock, { opacity: 1, y: 0, filter: 'blur(0px)' });
 
         targetBlock.classList.remove('hidden');
         targetBlock.classList.add('block');
 
-        gsap.fromTo(targetBlock, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out', onComplete: () => ScrollTrigger.refresh() });
+        gsap.fromTo(targetBlock,
+          { opacity: 0, y: 15, filter: 'blur(4px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out', onComplete: () => ScrollTrigger.refresh() }
+        );
       },
     });
   }
 }
 
 function initDemoInteractions() {
-  // Single document-level click handler for tier tabs
   if (!currentTabClickHandler) {
     currentTabClickHandler = (e) => {
       const btn = e.target.closest('.tier-tab-btn');
@@ -471,7 +485,6 @@ function initDemoInteractions() {
     document.addEventListener('click', currentTabClickHandler);
   }
 
-  // Menu category buttons (for demos page)
   document.querySelectorAll('.menu-cat-btn').forEach(btn => {
     const fn = () => {
       const target = btn.getAttribute('data-cat');
@@ -500,7 +513,10 @@ function initDemoInteractions() {
         block.classList.toggle('block', active);
         if (active && !prefersReduced) {
           const items = block.querySelectorAll('.showcase-card, .flex');
-          gsap.from(items, { y: 12, opacity: 0, duration: 0.3, stagger: 0.03, ease: 'power2.out' });
+          gsap.fromTo(items,
+            { y: 15, opacity: 0, filter: 'blur(4px)' },
+            { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.5, stagger: 0.04, ease: 'expo.out' }
+          );
         }
       });
     };
@@ -523,7 +539,7 @@ function initSpaceGallery() {
         start: 'top top',
         end: () => `+=${scrollContent.scrollWidth - window.innerWidth}`,
         pin: true,
-        scrub: 1,
+        scrub: 0.5, // Added slight smoothing to the scrub
         invalidateOnRefresh: true,
       },
     });
@@ -534,13 +550,22 @@ function initSpaceGallery() {
 function initSpotlightCards() {
   if (!window.matchMedia('(hover: hover)').matches) return;
   const cards = document.querySelectorAll('.showcase-card, .capability-card, .pricing-card, .demo-card');
+
+  // Debounce the spotlight effect slightly for performance
+  let ticking = false;
   cards.forEach(card => {
     const move = (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--spotlight-x', `${e.clientX - rect.left}px`);
-      card.style.setProperty('--spotlight-y', `${e.clientY - rect.top}px`);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--spotlight-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--spotlight-y', `${e.clientY - rect.top}px`);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    card.addEventListener('mousemove', move);
+    card.addEventListener('mousemove', move, { passive: true });
     currentHoverHandlers.push({ el: card, enter: move, leave: () => { } });
   });
 }
@@ -553,13 +578,13 @@ function initParallaxHero() {
   const blurs = heroSection.querySelectorAll('[class*="blur-"]');
   blurs.forEach((blur, i) => {
     const tween = gsap.to(blur, {
-      y: () => (i + 1) * 40,
+      y: () => (i + 1) * 60, // Increased parallax depth slightly
       ease: 'none',
       scrollTrigger: {
         trigger: heroSection,
         start: 'top top',
         end: 'bottom top',
-        scrub: 1,
+        scrub: true,
       },
     });
     cleanupFns.push(() => tween.kill());
@@ -570,22 +595,27 @@ function initNavScrollEffect() {
   const header = document.querySelector('header.sticky');
   if (!header) return;
 
+  let ticking = false;
   currentScrollHandler = () => {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    header.classList.toggle('nav-scrolled', scrollY > 80);
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        header.classList.toggle('nav-scrolled', scrollY > 40); // Lowered threshold for earlier activation
+        ticking = false;
+      });
+      ticking = true;
+    }
   };
 
   window.addEventListener('scroll', currentScrollHandler, { passive: true });
   currentScrollHandler();
 }
 
-// -------- Master init / cleanup --------
 function initAnimations() {
   clearHandlers();
   safeKillScrollTriggers();
   createLenis();
 
-  // Wrap each feature in try/catch so one failure doesn't stop the rest
   try { initPointerEffects(); } catch (e) { console.warn('initPointerEffects:', e); }
   try { initHeroEntrance(); } catch (e) { console.warn('initHeroEntrance:', e); }
   try { initCardReveals(); } catch (e) { console.warn('initCardReveals:', e); }
@@ -611,11 +641,9 @@ function cleanupAnimations() {
   document.body.style.overflow = '';
 }
 
-// -------- Astro lifecycle hooks --------
 if (typeof window !== 'undefined') {
   document.addEventListener('astro:page-load', initAnimations);
   document.addEventListener('astro:before-swap', cleanupAnimations);
 }
 
-// Expose utils for other components if needed
 export { gsap, ScrollTrigger, SplitText, splitIntoLines, splitIntoChars, prefersReduced, lenis, initAnimations, cleanupAnimations };
