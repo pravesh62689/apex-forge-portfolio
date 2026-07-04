@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Reveal, TiltCard } from '@/components/reveal'
 import { whatsappLink } from '@/lib/site-config'
 import { demos } from '@/lib/demos'
-import { DeviceShowcase } from '@/components/device-showcase'
 
 export function Showcase() {
   return (
@@ -14,10 +13,8 @@ export function Showcase() {
             Explore real websites I&apos;ve built — switch tiers inside each demo
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            See your business on every screen — each preview shows the website live on a laptop
-            and phone. Open a demo and flip between Basic, Growth and Premium to watch it grow
-            from a sharp single-page site into a full multi-page experience with live booking
-            that turns visitors into paying customers.
+            Every demo below is fully interactive. Open one and flip between Basic, Standard and
+            Premium to see exactly how your website grows with each plan.
           </p>
         </Reveal>
 
@@ -29,11 +26,13 @@ export function Showcase() {
                   href={`/demos/${demo.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/40"
                 >
-                  <div
-                    className="relative overflow-hidden px-4 pt-6"
-                    style={{ background: `radial-gradient(ellipse at 50% 120%, ${demo.accentSoft}, transparent 70%)` }}
-                  >
-                    <DeviceShowcase demo={demo} />
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={demo.card || '/placeholder.svg'}
+                      alt={`${demo.industry} website demo preview`}
+                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                     <span
                       className="absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white"
                       style={{ backgroundColor: demo.accent }}

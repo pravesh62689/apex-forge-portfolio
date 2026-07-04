@@ -35,13 +35,11 @@ export function Developer() {
             <div className="relative">
               <div className="tilt-wrap">
                 <TiltCard className="rounded-3xl">
-                  <div className="flex items-center justify-center overflow-hidden rounded-3xl border border-border bg-card">
-                    <img
-                      src="/images/dev-demo-review.jpg"
-                      alt="Pravesh, the software engineer behind Apex Forge, reviewing a client demo website at his desk"
-                      className="max-h-[520px] w-full object-contain"
-                    />
-                  </div>
+                  <img
+                    src="/images/dev-demo-review.jpg"
+                    alt="Pravesh, the software engineer behind Apex Forge, reviewing a client demo website at his desk"
+                    className="w-full rounded-3xl border border-border object-cover"
+                  />
                 </TiltCard>
               </div>
               <div className="absolute -bottom-5 left-6 right-6 grid grid-cols-2 gap-3 sm:left-10 sm:right-10">

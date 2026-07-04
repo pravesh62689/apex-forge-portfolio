@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Menu, X, Mail } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
 import { siteConfig, whatsappLink, defaultWhatsappMessage } from '@/lib/site-config'
 
 const links = [
@@ -40,12 +40,12 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <a
-            href={siteConfig.emailHref}
+            href={siteConfig.phoneHref}
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">Email us at </span>
-            {siteConfig.email}
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">Call us at </span>
+            {siteConfig.phoneDisplay}
           </a>
           <a
             href={whatsappLink(defaultWhatsappMessage)}
@@ -90,11 +90,11 @@ export function Navbar() {
               Get a Quote on WhatsApp
             </a>
             <a
-              href={siteConfig.emailHref}
+              href={siteConfig.phoneHref}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-bold text-foreground"
             >
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              {siteConfig.email}
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call {siteConfig.phoneDisplay}
             </a>
           </div>
         </div>

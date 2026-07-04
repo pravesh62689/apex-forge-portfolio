@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { ArrowRight, Mail, ChevronDown } from 'lucide-react'
+import { ArrowRight, Phone, ChevronDown } from 'lucide-react'
 import { siteConfig, whatsappLink, defaultWhatsappMessage } from '@/lib/site-config'
 
 const HeroScene = dynamic(() => import('@/components/hero-scene'))
@@ -56,14 +56,14 @@ export function Hero() {
                 />
               </a>
               <a
-                href={siteConfig.emailHref}
+                href={siteConfig.phoneHref}
                 className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-8 py-4 text-base font-bold text-foreground transition-all duration-300 hover:bg-secondary hover:border-primary/40 hover:scale-[1.03] active:scale-[0.98]"
               >
-                <Mail
+                <Phone
                   className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12"
                   aria-hidden="true"
                 />
-                {siteConfig.email}
+                Call {siteConfig.phoneDisplay}
               </a>
             </div>
 
@@ -75,19 +75,13 @@ export function Hero() {
 
           <div className="lg:col-span-5 relative h-72 sm:h-96 lg:h-[520px]">
             <HeroScene />
-            <div className="pointer-events-none absolute right-2 top-6 z-10 animate-[badge-pulse_3s_ease-in-out_infinite] rounded-full border border-primary/30 bg-card/90 px-4 py-2 text-xs font-bold text-primary shadow-lg backdrop-blur">
-              Your business will grow ↑
-            </div>
-            <div className="pointer-events-none absolute bottom-8 left-2 z-10 rounded-full border border-border bg-card/90 px-4 py-2 text-xs font-bold text-foreground shadow-lg backdrop-blur">
-              Live on laptop &amp; mobile
-            </div>
           </div>
         </div>
 
         {/* Scroll indicator */}
         <div className="mt-12 hidden lg:flex justify-center">
           <a
-            href="#demos"
+            href="#showcase"
             className="flex flex-col items-center gap-1 text-muted-foreground transition-colors hover:text-primary"
             aria-label="Scroll to see our work"
           >

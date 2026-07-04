@@ -1,15 +1,12 @@
-// Central config — swap the placeholder contact details here when ready.
-// The phone number is NEVER shown on the site. It only powers the WhatsApp
-// redirect link, so visitors reach you via WhatsApp without seeing the number.
+// Central config — swap the placeholder numbers here when ready.
 export const siteConfig = {
   brand: 'Apex Forge',
   developer: 'Pravesh',
   tagline: 'Websites that win local customers',
-  // Digits only, with country code — used ONLY inside wa.me links (kept private)
+  // Placeholder numbers — replace with real ones (digits only for WhatsApp link)
   whatsappNumber: '910000000000',
-  // Public email — safe to display everywhere
-  email: 'hello@apexforge.in',
-  emailHref: 'mailto:hello@apexforge.in',
+  phoneDisplay: '+91 00000 00000',
+  phoneHref: 'tel:+910000000000',
   location: 'Noida & NCR, India',
 }
 

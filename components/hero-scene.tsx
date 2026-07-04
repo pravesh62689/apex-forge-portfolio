@@ -1,9 +1,48 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, Environment, Stars } from '@react-three/drei'
+import { Float, MeshDistortMaterial, Environment, Stars } from '@react-three/drei'
 import { Suspense, useRef, useMemo } from 'react'
-import type { Group, Points } from 'three'
+import type { Mesh, Group, Points } from 'three'
+import * as THREE from 'three'
+
+/** Core morphing icosahedron that also follows the mouse subtly. */
+function ForgeCore() {
+  const mesh = useRef<Mesh>(null)
+  useFrame((state) => {
+    if (!mesh.current) return
+    const t = state.clock.elapsedTime
+    mesh.current.rotation.y = t * 0.15
+    mesh.current.rotation.x = Math.sin(t * 0.2) * 0.15
+    // Subtle mouse parallax
+    mesh.current.position.x = THREE.MathUtils.lerp(
+      mesh.current.position.x,
+      state.pointer.x * 0.35,
+      0.04,
+    )
+    mesh.current.position.y = THREE.MathUtils.lerp(
+      mesh.current.position.y,
+      state.pointer.y * 0.25,
+      0.04,
+    )
+  })
+  return (
+    <Float speed={1.4} rotationIntensity={0.4} floatIntensity={0.8}>
+      <mesh ref={mesh}>
+        <icosahedronGeometry args={[1.35, 4]} />
+        <MeshDistortMaterial
+          color="#0e7490"
+          emissive="#06b6d4"
+          emissiveIntensity={0.25}
+          roughness={0.12}
+          metalness={0.9}
+          distort={0.36}
+          speed={1.8}
+        />
+      </mesh>
+    </Float>
+  )
+}
 
 /** Rotating wireframe shell + orbital rings, tilts with mouse. */
 function WireShell() {
@@ -110,63 +149,6 @@ function ParticleField() {
   )
 }
 
-/** Floating 3D laptop + phone showing a glowing "website" — the client's site live on devices. */
-function Devices() {
-  const group = useRef<Group>(null)
-  useFrame((state) => {
-    if (!group.current) return
-    const t = state.clock.elapsedTime
-    group.current.rotation.y = Math.sin(t * 0.3) * 0.25 + state.pointer.x * 0.2
-    group.current.rotation.x = -0.15 + state.pointer.y * -0.1
-  })
-  return (
-    <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.7}>
-      <group ref={group} position={[0, -0.2, 0]} scale={1.15}>
-        {/* Laptop screen */}
-        <group position={[0, 0.35, 0]} rotation={[-0.18, 0, 0]}>
-          <mesh position={[0, 0, -0.03]}>
-            <boxGeometry args={[2.1, 1.3, 0.06]} />
-            <meshStandardMaterial color="#1f242c" metalness={0.7} roughness={0.3} />
-          </mesh>
-          <mesh position={[0, 0, 0.011]}>
-            <planeGeometry args={[1.95, 1.15]} />
-            <meshStandardMaterial color="#06b6d4" emissive="#06b6d4" emissiveIntensity={0.6} />
-          </mesh>
-          {/* header + content bars on screen */}
-          <mesh position={[0, 0.45, 0.02]}>
-            <planeGeometry args={[1.95, 0.22]} />
-            <meshBasicMaterial color="#0e7490" />
-          </mesh>
-          {[0.05, -0.18, -0.4].map((y, i) => (
-            <mesh key={i} position={[-0.45 - i * 0.05, y, 0.02]}>
-              <planeGeometry args={[1 - i * 0.25, 0.09]} />
-              <meshBasicMaterial color="#e0f2fe" transparent opacity={0.85} />
-            </mesh>
-          ))}
-        </group>
-        {/* Laptop base */}
-        <mesh position={[0, -0.32, 0.42]} rotation={[-1.45, 0, 0]}>
-          <boxGeometry args={[2.1, 1.35, 0.06]} />
-          <meshStandardMaterial color="#2b3140" metalness={0.8} roughness={0.35} />
-        </mesh>
-        {/* Floating phone */}
-        <Float speed={2} floatIntensity={0.9}>
-          <group position={[1.5, 0.05, 0.6]} rotation={[0, -0.4, 0.12]}>
-            <mesh>
-              <boxGeometry args={[0.62, 1.24, 0.06]} />
-              <meshStandardMaterial color="#1f242c" metalness={0.7} roughness={0.3} />
-            </mesh>
-            <mesh position={[0, 0, 0.035]}>
-              <planeGeometry args={[0.54, 1.12]} />
-              <meshStandardMaterial color="#34d399" emissive="#34d399" emissiveIntensity={0.5} />
-            </mesh>
-          </group>
-        </Float>
-      </group>
-    </Float>
-  )
-}
-
 export default function HeroScene() {
   return (
     <div className="absolute inset-0" aria-hidden="true">
@@ -179,7 +161,7 @@ export default function HeroScene() {
           <ambientLight intensity={0.4} />
           <directionalLight position={[4, 4, 6]} intensity={1.2} color="#e0f2fe" />
           <pointLight position={[-4, -2, -4]} intensity={0.6} color="#06b6d4" />
-          <Devices />
+          <ForgeCore />
           <WireShell />
           <Satellites />
           <ParticleField />
