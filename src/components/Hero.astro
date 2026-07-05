@@ -89,7 +89,7 @@
 
       <!-- Right Column: 3D character team presenting the product to a happy customer -->
       <div
-        class="lg:col-span-5 xl:col-span-4 flex items-center justify-center relative mt-12 lg:mt-0 hero-mockup-safe"
+        class="lg:col-span-5 xl:col-span-4 flex items-center justify-center relative mt-12 lg:mt-0 hero-mockup-safe hero-3d-viewport"
       >
         <div class="hero-3d-stage relative w-full max-w-[520px] mx-auto">
           <!-- Glow platform behind the characters -->
@@ -457,6 +457,57 @@
         });
       }
     });
+
+    // --- Realistic interactive 3D scene (depth + idle bob + cursor parallax) ---
+    if (!prefersReducedMotion) {
+      const viewport = document.querySelector(".hero-3d-viewport");
+      const stage = document.querySelector(".hero-3d-stage");
+      const frame = document.querySelector(".hero-3d-frame");
+      const speech = document.querySelector(".hero-speech");
+      const card1 = document.querySelector(".hero-float-card-1");
+      const card2 = document.querySelector(".hero-float-card-2");
+
+      if (viewport && stage && frame) {
+        // Establish real depth layers so tilt produces genuine parallax
+        gsap.set(frame, { z: 30, transformPerspective: 1100 });
+        gsap.set(speech, { z: 90 });
+        gsap.set(card1, { z: 120 });
+        gsap.set(card2, { z: 70 });
+
+        // Gentle, lifelike idle bobbing — each layer drifts on its own rhythm
+        gsap.to(frame, { y: -12, rotationZ: -0.5, duration: 3.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        gsap.to(speech, { y: -16, duration: 4.2, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        gsap.to(card1, { y: -18, duration: 3.8, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        gsap.to(card2, { y: 14, duration: 4.6, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 0.6 });
+
+        // Smoothly interpolated cursor-driven tilt for the whole scene
+        const rotX = gsap.quickTo(stage, "rotationX", { duration: 0.9, ease: "power2.out" });
+        const rotY = gsap.quickTo(stage, "rotationY", { duration: 0.9, ease: "power2.out" });
+        // Extra parallax push on foreground layers for depth realism
+        const c1x = gsap.quickTo(card1, "x", { duration: 1, ease: "power2.out" });
+        const spx = gsap.quickTo(speech, "x", { duration: 1.1, ease: "power2.out" });
+
+        const MAX = 12; // max tilt degrees
+        function onMove(e) {
+          const r = viewport.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 .. 0.5
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          rotY(px * MAX * 2);
+          rotX(-py * MAX * 2);
+          c1x(px * 26);
+          spx(px * -18);
+        }
+        function onLeave() {
+          rotX(0);
+          rotY(0);
+          c1x(0);
+          spx(0);
+        }
+
+        viewport.addEventListener("pointermove", onMove);
+        viewport.addEventListener("pointerleave", onLeave);
+      }
+    }
 
     // --- 2. Continuous background animation ---
     if (!prefersReducedMotion) {
@@ -1031,8 +1082,15 @@
   /* ============================================================
      3D CHARACTER HERO SCENE
      ============================================================ */
+  /* Perspective viewport — gives children real 3D depth as the scene tilts */
+  .hero-3d-viewport {
+    perspective: 1100px;
+    perspective-origin: 50% 40%;
+  }
+
   .hero-3d-stage {
-    perspective: 1200px;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .hero-3d-frame {
@@ -1042,23 +1100,41 @@
     box-shadow:
       0 30px 80px -20px rgba(0, 0, 0, 0.7),
       0 0 60px -20px rgba(6, 182, 212, 0.35);
-    animation: hero3dFloat 6s ease-in-out infinite;
+    transform-style: preserve-3d;
     will-change: transform;
+  }
+
+  /* Moving specular light sweep across the frame for a realistic glossy surface */
+  .hero-3d-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.14) 46%,
+      rgba(255, 255, 255, 0.04) 52%,
+      transparent 66%
+    );
+    transform: translateX(-120%);
+    animation: heroSheen 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes heroSheen {
+    0%,
+    62% {
+      transform: translateX(-120%);
+    }
+    82%,
+    100% {
+      transform: translateX(120%);
+    }
   }
 
   .hero-3d-img {
     display: block;
     transform-style: preserve-3d;
-  }
-
-  @keyframes hero3dFloat {
-    0%,
-    100% {
-      transform: translateY(0) rotateZ(0deg);
-    }
-    50% {
-      transform: translateY(-14px) rotateZ(-0.6deg);
-    }
   }
 
   /* Glowing platform behind the characters */
@@ -1108,8 +1184,8 @@
     border-radius: 16px 16px 16px 4px;
     box-shadow: 0 12px 40px -8px rgba(6, 182, 212, 0.4);
     backdrop-filter: blur(6px);
-    animation: heroSpeechFloat 5.5s ease-in-out infinite;
-    animation-delay: 0.4s;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .hero-speech-dot {
@@ -1138,15 +1214,6 @@
     color: var(--primary-accent);
   }
 
-  @keyframes heroSpeechFloat {
-    0%,
-    100% {
-      transform: translateY(0) rotate(-1deg);
-    }
-    50% {
-      transform: translateY(-10px) rotate(0.5deg);
-    }
-  }
   @keyframes heroDotBlink {
     0%,
     100% {
@@ -1176,13 +1243,10 @@
   .hero-float-card-1 {
     bottom: 20%;
     right: -4%;
-    animation: heroCardFloatA 6s ease-in-out infinite;
   }
   .hero-float-card-2 {
     bottom: 4%;
     left: 2%;
-    animation: heroCardFloatB 7s ease-in-out infinite;
-    animation-delay: 1s;
   }
 
   .hero-float-icon {
@@ -1203,30 +1267,9 @@
     color: #f59e0b;
   }
 
-  @keyframes heroCardFloatA {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-12px);
-    }
-  }
-  @keyframes heroCardFloatB {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(10px);
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .hero-3d-img,
     .hero-3d-glow,
-    .hero-speech,
-    .hero-float-card,
+    .hero-3d-frame::after,
     .hero-speech-dot {
       animation: none !important;
     }
