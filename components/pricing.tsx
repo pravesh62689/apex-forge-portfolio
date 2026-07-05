@@ -52,17 +52,26 @@ export function Pricing() {
                     {tier.badge}
                   </span>
                   <h3 className="mt-4 font-display text-2xl font-bold">{tier.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground min-h-[3.75rem]">
                     {tier.description}
                   </p>
                 </div>
 
-                <p className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-success">
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="font-display text-4xl font-bold tracking-tight text-foreground">
+                    {tier.price}
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    {tier.priceNote}
+                  </span>
+                </div>
+
+                <p className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-success">
                   <Clock className="h-4 w-4" aria-hidden="true" />
                   {tier.delivery}
                 </p>
 
-                <ul className="mt-7 flex flex-col gap-3.5 border-t border-border pt-7">
+                <ul className="mt-6 flex flex-col gap-3.5 border-t border-border pt-6">
                   {tier.features.map((f) => (
                     <li key={f.label} className="flex items-start gap-3 text-sm">
                       {f.included ? (

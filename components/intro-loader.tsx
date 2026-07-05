@@ -3,57 +3,70 @@
 import { useEffect, useState } from 'react'
 
 /**
- * First-load "forge ignition" intro. Pure CSS animation, shown once per
- * browser session so repeat navigation stays instant. Respects
- * prefers-reduced-motion and never blocks interaction after it fades.
+ * Cinematic first-load intro ("forge ignition"). Full-screen CSS animation that
+ * plays on every fresh page load, locks scroll while it runs, then splits open
+ * like a curtain to reveal the hero. Respects prefers-reduced-motion.
  */
+const BRAND = 'APEX FORGE'
+
 export function IntroLoader() {
-  const [mounted, setMounted] = useState(false)
-  const [leaving, setLeaving] = useState(false)
-  const [done, setDone] = useState(false)
+  const [phase, setPhase] = useState<'run' | 'reveal' | 'done'>('run')
 
   useEffect(() => {
-    // Skip entirely if already seen this session or motion is reduced.
-    const seen =
-      typeof window !== 'undefined' && sessionStorage.getItem('af-intro-seen') === '1'
     const reduced =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (seen || reduced) {
-      setDone(true)
+    if (reduced) {
+      setPhase('done')
       return
     }
-    setMounted(true)
     document.body.style.overflow = 'hidden'
-    const leaveTimer = setTimeout(() => setLeaving(true), 1800)
+    const revealTimer = setTimeout(() => setPhase('reveal'), 2600)
     const doneTimer = setTimeout(() => {
-      setDone(true)
-      sessionStorage.setItem('af-intro-seen', '1')
+      setPhase('done')
       document.body.style.overflow = ''
-    }, 2500)
+    }, 3500)
     return () => {
-      clearTimeout(leaveTimer)
+      clearTimeout(revealTimer)
       clearTimeout(doneTimer)
       document.body.style.overflow = ''
     }
   }, [])
 
-  if (done || !mounted) return null
+  if (phase === 'done') return null
 
   return (
     <div
-      className={`intro-root ${leaving ? 'intro-leaving' : ''}`}
+      className={`intro-root ${phase === 'reveal' ? 'intro-reveal' : ''}`}
       role="status"
       aria-label="Loading Apex Forge"
     >
+      {/* Curtain panels that split apart on reveal */}
+      <span className="intro-curtain intro-curtain-top" aria-hidden="true" />
+      <span className="intro-curtain intro-curtain-bottom" aria-hidden="true" />
+
       <div className="intro-center">
         <span className="intro-mark" aria-hidden="true">
           <span className="intro-mark-inner">AF</span>
           <span className="intro-ring" />
           <span className="intro-ring intro-ring-2" />
+          <span className="intro-spark" />
         </span>
-        <span className="intro-word">Apex Forge</span>
-        <span className="intro-sub">Forging your web presence</span>
+
+        <span className="intro-word" aria-hidden="true">
+          {BRAND.split('').map((c, i) => (
+            <span
+              key={i}
+              className="intro-letter"
+              style={{ animationDelay: `${0.5 + i * 0.06}s` }}
+            >
+              {c === ' ' ? '\u00A0' : c}
+            </span>
+          ))}
+        </span>
+
+        <span className="intro-sub">Forging websites that win customers</span>
+
         <span className="intro-bar" aria-hidden="true">
           <span className="intro-bar-fill" />
         </span>

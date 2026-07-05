@@ -19,6 +19,7 @@ const SUGGESTIONS = [
 
 export function ChatAssistant() {
   const [open, setOpen] = useState(false)
+  const [nudge, setNudge] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Msg[]>([{ role: 'bot', text: GREETING }])
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -27,6 +28,18 @@ export function ChatAssistant() {
   useEffect(() => {
     if (open) scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages, open])
+
+  // Auto-open once per session ~4.5s after load to invite questions.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (sessionStorage.getItem('af-chat-opened') === '1') return
+    const t = setTimeout(() => {
+      setOpen(true)
+      setNudge(true)
+      sessionStorage.setItem('af-chat-opened', '1')
+    }, 4500)
+    return () => clearTimeout(t)
+  }, [])
 
   function send(text: string) {
     const query = text.trim()
@@ -48,11 +61,20 @@ export function ChatAssistant() {
       {/* Launcher */}
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => {
+          setOpen((o) => !o)
+          setNudge(false)
+        }}
         aria-label={open ? 'Close chat assistant' : 'Open chat assistant'}
         aria-expanded={open}
         className="group fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-black/40 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_32px_-4px_var(--primary)]"
       >
+        {!open && nudge && (
+          <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5" aria-hidden="true">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
+            <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-success" />
+          </span>
+        )}
         {open ? (
           <X className="h-6 w-6" aria-hidden="true" />
         ) : (

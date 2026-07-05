@@ -22,6 +22,8 @@ export const defaultWhatsappMessage =
 export type Tier = {
   name: string
   badge: string
+  price: string
+  priceNote: string
   delivery: string
   description: string
   // Everything included in the package
@@ -37,6 +39,8 @@ export const tiers: Tier[] = [
   {
     name: 'Starter',
     badge: 'Get online fast',
+    price: '₹4,999',
+    priceNote: 'one-time · from',
     delivery: 'Live in 2 days',
     description:
       'A polished, single-page site that gets your business found on Google and reachable on WhatsApp — everything a first web presence needs.',
@@ -62,6 +66,8 @@ export const tiers: Tier[] = [
   {
     name: 'Growth',
     badge: 'Most popular',
+    price: '₹9,999',
+    priceNote: 'one-time · from',
     delivery: 'Live in 4 days',
     description:
       'A complete multi-section site engineered to turn visitors into enquiries and walk-ins — the sweet spot for most local businesses.',
@@ -88,6 +94,8 @@ export const tiers: Tier[] = [
   {
     name: 'Premium',
     badge: 'Fully custom',
+    price: '₹24,999',
+    priceNote: 'one-time · from',
     delivery: 'Timeline scoped per project',
     description:
       'Multi-page, app-grade builds with real systems — online reservations, payments and an admin dashboard. Scoped feature by feature.',
