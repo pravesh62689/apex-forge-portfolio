@@ -14,16 +14,16 @@ export function DeviceShowcase({ demo }: { demo: Demo }) {
       <div className="device-laptop">
         <div className="device-laptop-screen" style={{ borderColor: '#1f242c' }}>
           {/* Mini website inside the laptop */}
-          <div className="flex h-full w-full flex-col overflow-hidden rounded-[4px] bg-white text-left">
+          <div className="flex h-full w-full flex-col overflow-hidden rounded-[6px] bg-white text-left">
             <div
-              className="flex items-center justify-between px-2 py-1"
+              className="flex items-center justify-between px-2.5 py-1.5"
               style={{ backgroundColor: accent }}
             >
-              <span className="text-[5px] font-bold text-white">{demo.business}</span>
+              <span className="text-[7px] font-bold text-white">{demo.business}</span>
               <span className="flex gap-1">
-                <span className="h-1 w-3 rounded-full bg-white/60" />
-                <span className="h-1 w-3 rounded-full bg-white/60" />
-                <span className="h-1 w-3 rounded-full bg-white/60" />
+                <span className="h-[3px] w-4 rounded-full bg-white/60" />
+                <span className="h-[3px] w-4 rounded-full bg-white/60" />
+                <span className="h-[3px] w-4 rounded-full bg-white/60" />
               </span>
             </div>
             <div className="relative flex-1">
@@ -33,10 +33,10 @@ export function DeviceShowcase({ demo }: { demo: Demo }) {
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-1 left-1.5 right-1.5">
-                <p className="text-[5px] font-bold leading-tight text-white">{demo.tagline}</p>
+              <div className="absolute bottom-1.5 left-2 right-2">
+                <p className="text-[7px] font-bold leading-tight text-white">{demo.tagline}</p>
                 <span
-                  className="mt-0.5 inline-block rounded-full px-1.5 py-[1px] text-[4px] font-bold text-white"
+                  className="mt-1 inline-block rounded-full px-2 py-[2px] text-[6px] font-bold text-white"
                   style={{ backgroundColor: accent }}
                 >
                   WhatsApp Us
@@ -50,18 +50,18 @@ export function DeviceShowcase({ demo }: { demo: Demo }) {
 
       {/* Floating phone */}
       <div className="device-phone">
-        <div className="flex h-full w-full flex-col overflow-hidden rounded-[7px] bg-white">
-          <div className="px-1.5 py-1" style={{ backgroundColor: accent }}>
-            <p className="text-[4.5px] font-bold text-white">{demo.business}</p>
+        <div className="flex h-full w-full flex-col overflow-hidden rounded-[10px] bg-white">
+          <div className="px-2 py-1.5" style={{ backgroundColor: accent }}>
+            <p className="text-[6px] font-bold text-white">{demo.business}</p>
           </div>
-          <div className="flex flex-1 flex-col gap-[3px] p-1.5" style={{ backgroundColor: '#fff' }}>
-            <div className="h-6 w-full overflow-hidden rounded-[3px]">
+          <div className="flex flex-1 flex-col gap-1 p-2" style={{ backgroundColor: '#fff' }}>
+            <div className="h-9 w-full overflow-hidden rounded-[4px]">
               <img src={demo.card || '/placeholder.svg'} alt="" className="h-full w-full object-cover" />
             </div>
-            <div className="h-[3px] w-4/5 rounded-full" style={{ backgroundColor: soft }} />
-            <div className="h-[3px] w-3/5 rounded-full" style={{ backgroundColor: soft }} />
+            <div className="h-[4px] w-4/5 rounded-full" style={{ backgroundColor: soft }} />
+            <div className="h-[4px] w-3/5 rounded-full" style={{ backgroundColor: soft }} />
             <div
-              className="mt-auto rounded-full py-[2px] text-center text-[4px] font-bold text-white"
+              className="mt-auto rounded-full py-1 text-center text-[6px] font-bold text-white"
               style={{ backgroundColor: accent }}
             >
               Book Now
@@ -72,7 +72,7 @@ export function DeviceShowcase({ demo }: { demo: Demo }) {
 
       {/* Income sparkle — customers → revenue cue */}
       <div className="device-badge" style={{ backgroundColor: accent }}>
-        <span className="text-[8px] font-bold text-white">↑ Customers</span>
+        <span className="text-[10px] font-bold text-white">↑ Customers</span>
       </div>
     </div>
   )
