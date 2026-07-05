@@ -10,10 +10,12 @@ import { Process } from "@/components/process"
 import { Faq } from "@/components/faq"
 import { FinalCta } from "@/components/final-cta"
 import { WhatsappFab } from "@/components/whatsapp-fab"
+import { Intro } from "@/components/intro"
 
 export default function Page() {
   return (
     <main className="relative">
+      <Intro />
       <Navbar />
       <Hero />
       <TrustBar />

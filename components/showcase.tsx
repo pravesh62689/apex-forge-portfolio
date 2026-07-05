@@ -14,8 +14,8 @@ export function Showcase() {
             Explore real websites I&apos;ve built — switch tiers inside each demo
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            See your business on every screen — each preview shows the website live on a laptop
-            and phone. Open a demo and flip between Basic, Growth and Premium to watch it grow
+            See your business online — each card is a real website I&apos;ve built. Open a demo and
+            flip between Basic, Growth and Premium to watch it grow
             from a sharp single-page site into a full multi-page experience with live booking
             that turns visitors into paying customers.
           </p>
@@ -29,13 +29,10 @@ export function Showcase() {
                   href={`/demos/${demo.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/40"
                 >
-                  <div
-                    className="relative overflow-hidden px-4 pt-6"
-                    style={{ background: `radial-gradient(ellipse at 50% 120%, ${demo.accentSoft}, transparent 70%)` }}
-                  >
+                  <div className="relative p-4 pb-0">
                     <DeviceShowcase demo={demo} />
                     <span
-                      className="absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white"
+                      className="absolute left-6 top-6 z-10 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow"
                       style={{ backgroundColor: demo.accent }}
                     >
                       {demo.industry}

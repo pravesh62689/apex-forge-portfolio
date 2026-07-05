@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, Environment, Stars } from '@react-three/drei'
+import { Float, Environment, Stars, RoundedBox } from '@react-three/drei'
 import { Suspense, useRef, useMemo } from 'react'
 import type { Group, Points } from 'three'
 
@@ -110,56 +110,62 @@ function ParticleField() {
   )
 }
 
-/** Floating 3D laptop + phone showing a glowing "website" — the client's site live on devices. */
+/** Sleek floating website screen + phone with rounded, polished geometry. */
 function Devices() {
   const group = useRef<Group>(null)
   useFrame((state) => {
     if (!group.current) return
     const t = state.clock.elapsedTime
-    group.current.rotation.y = Math.sin(t * 0.3) * 0.25 + state.pointer.x * 0.2
-    group.current.rotation.x = -0.15 + state.pointer.y * -0.1
+    group.current.rotation.y = Math.sin(t * 0.3) * 0.2 + state.pointer.x * 0.18
+    group.current.rotation.x = -0.08 + state.pointer.y * -0.08
   })
   return (
-    <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.7}>
-      <group ref={group} position={[0, -0.2, 0]} scale={1.15}>
-        {/* Laptop screen */}
-        <group position={[0, 0.35, 0]} rotation={[-0.18, 0, 0]}>
-          <mesh position={[0, 0, -0.03]}>
-            <boxGeometry args={[2.1, 1.3, 0.06]} />
-            <meshStandardMaterial color="#1f242c" metalness={0.7} roughness={0.3} />
-          </mesh>
-          <mesh position={[0, 0, 0.011]}>
-            <planeGeometry args={[1.95, 1.15]} />
-            <meshStandardMaterial color="#06b6d4" emissive="#06b6d4" emissiveIntensity={0.6} />
-          </mesh>
-          {/* header + content bars on screen */}
-          <mesh position={[0, 0.45, 0.02]}>
-            <planeGeometry args={[1.95, 0.22]} />
+    <Float speed={1.1} rotationIntensity={0.15} floatIntensity={0.6}>
+      <group ref={group} position={[0, 0, 0]} scale={1.1}>
+        {/* Main website screen — rounded, glassy monitor */}
+        <group position={[-0.15, 0.1, 0]} rotation={[0, 0.12, 0]}>
+          {/* Bezel */}
+          <RoundedBox args={[2.2, 1.42, 0.1]} radius={0.07} smoothness={4} position={[0, 0, -0.04]}>
+            <meshStandardMaterial color="#151a22" metalness={0.85} roughness={0.28} />
+          </RoundedBox>
+          {/* Screen glow */}
+          <RoundedBox args={[2.02, 1.24, 0.02]} radius={0.04} smoothness={4} position={[0, 0, 0.03]}>
+            <meshStandardMaterial color="#0b3a44" emissive="#06b6d4" emissiveIntensity={0.5} metalness={0.2} roughness={0.5} />
+          </RoundedBox>
+          {/* Top browser bar */}
+          <mesh position={[0, 0.5, 0.045]}>
+            <planeGeometry args={[2.02, 0.2]} />
             <meshBasicMaterial color="#0e7490" />
           </mesh>
-          {[0.05, -0.18, -0.4].map((y, i) => (
-            <mesh key={i} position={[-0.45 - i * 0.05, y, 0.02]}>
-              <planeGeometry args={[1 - i * 0.25, 0.09]} />
-              <meshBasicMaterial color="#e0f2fe" transparent opacity={0.85} />
+          {[[-0.86, 0.5], [-0.79, 0.5], [-0.72, 0.5]].map(([x, y], i) => (
+            <mesh key={i} position={[x, y, 0.05]}>
+              <circleGeometry args={[0.02, 16]} />
+              <meshBasicMaterial color="#e0f2fe" />
             </mesh>
           ))}
+          {/* Content lines */}
+          {[0.18, -0.02, -0.22].map((y, i) => (
+            <mesh key={i} position={[-0.5 - i * 0.08, y, 0.05]}>
+              <planeGeometry args={[0.95 - i * 0.22, 0.08]} />
+              <meshBasicMaterial color="#e0f2fe" transparent opacity={0.9} />
+            </mesh>
+          ))}
+          {/* CTA pill */}
+          <mesh position={[-0.62, -0.45, 0.05]}>
+            <planeGeometry args={[0.5, 0.14]} />
+            <meshBasicMaterial color="#34d399" />
+          </mesh>
         </group>
-        {/* Laptop base */}
-        <mesh position={[0, -0.32, 0.42]} rotation={[-1.45, 0, 0]}>
-          <boxGeometry args={[2.1, 1.35, 0.06]} />
-          <meshStandardMaterial color="#2b3140" metalness={0.8} roughness={0.35} />
-        </mesh>
+
         {/* Floating phone */}
-        <Float speed={2} floatIntensity={0.9}>
-          <group position={[1.5, 0.05, 0.6]} rotation={[0, -0.4, 0.12]}>
-            <mesh>
-              <boxGeometry args={[0.62, 1.24, 0.06]} />
-              <meshStandardMaterial color="#1f242c" metalness={0.7} roughness={0.3} />
-            </mesh>
-            <mesh position={[0, 0, 0.035]}>
-              <planeGeometry args={[0.54, 1.12]} />
-              <meshStandardMaterial color="#34d399" emissive="#34d399" emissiveIntensity={0.5} />
-            </mesh>
+        <Float speed={1.8} floatIntensity={0.7}>
+          <group position={[1.45, -0.12, 0.55]} rotation={[0, -0.45, 0.1]}>
+            <RoundedBox args={[0.66, 1.3, 0.08]} radius={0.09} smoothness={4}>
+              <meshStandardMaterial color="#151a22" metalness={0.85} roughness={0.28} />
+            </RoundedBox>
+            <RoundedBox args={[0.56, 1.16, 0.02]} radius={0.06} smoothness={4} position={[0, 0, 0.045]}>
+              <meshStandardMaterial color="#0b3a2f" emissive="#34d399" emissiveIntensity={0.45} metalness={0.2} roughness={0.5} />
+            </RoundedBox>
           </group>
         </Float>
       </group>
