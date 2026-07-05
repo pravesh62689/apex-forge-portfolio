@@ -9,4 +9,10 @@ export default defineConfig({
     tailwind(),
     // ...your existing integrations (tailwind, etc.) stay here too
   ],
+  vite: {
+    server: {
+      // Allow the v0 / Vercel preview domains (and any others) to load the dev server
+      allowedHosts: true,
+    },
+  },
 });
