@@ -1,36 +1,6 @@
 import { Reveal } from '@/components/reveal'
 import { ChevronDown } from 'lucide-react'
-
-const faqs = [
-  {
-    q: 'Is 2 days really enough to build a website?',
-    a: 'Yes — for the Basic one-page site, once we have your content (photos, text, logo). We use a proven, high-performance foundation and focus the 2 days on your branding, content and local SEO rather than reinventing the wheel. Growth sites take 4 days for the same reason. If anything would push the timeline, we tell you before starting, not after.',
-  },
-  {
-    q: 'What do I need to provide?',
-    a: 'Your logo (or we can create a simple one), photos of your business, your services with prices, contact details, and your Google Business listing if you have one. The faster you share content, the faster we deliver — the clock starts when content arrives.',
-  },
-  {
-    q: 'Are there any recurring or hidden costs?',
-    a: 'The package price is one-time. The only recurring costs are your domain name (typically ₹800–1,500/year, paid directly to the registrar in your name) and hosting — which for most local business sites is free on modern platforms. We set both up in your name so you are never dependent on us.',
-  },
-  {
-    q: 'Can I add features later, or mix features between packages?',
-    a: 'Absolutely. Any feature can be added to any package at its individual price — before launch or months later. Start with Basic today and add a booking system next quarter. Your site is built so it can grow.',
-  },
-  {
-    q: 'Will my website show up on Google?',
-    a: 'We set up proper on-page SEO, structured data, and submit your site to Google — that gets you indexed and eligible to rank for local searches. What we will not do is promise a specific ranking or "#1 on Google" — no honest agency can guarantee that. What we can promise is a technically correct foundation that gives you a genuine shot at it.',
-  },
-  {
-    q: 'What happens after the site goes live?',
-    a: 'You own everything — code, domain, content. Growth includes 1 month of fixes; Premium includes 3 months of priority support. After that, you can maintain it yourself, hire anyone, or keep us on for updates at transparent per-change or monthly rates.',
-  },
-  {
-    q: 'How do payments work?',
-    a: '50% to begin, 50% when you approve the finished site — before it goes live. You see the complete working website on a preview link before paying the balance. UPI or bank transfer, with a proper invoice.',
-  },
-]
+import { faqs } from '@/lib/knowledge'
 
 export function Faq() {
   return (

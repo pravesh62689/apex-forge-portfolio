@@ -36,23 +36,26 @@ export function Developer() {
             <div className="relative">
               <div className="tilt-wrap">
                 <TiltCard className="rounded-3xl">
-                  <img
-                    src="/images/dev-demo-review.jpg"
-                    alt="Pravesh, the software engineer behind Apex Forge, reviewing a client demo website at his desk"
-                    className="w-full rounded-3xl border border-border object-cover"
-                  />
+                <ImageWithSkeleton
+                  src="/images/dev-demo-review.jpg"
+                  alt="Pravesh, the software engineer behind Apex Forge, reviewing a client demo website at his desk"
+                  className="w-full rounded-3xl"
+                  imgClassName="w-full rounded-3xl border border-border object-cover"
+                />
                 </TiltCard>
               </div>
               <div className="absolute -bottom-5 left-6 right-6 grid grid-cols-2 gap-3 sm:left-10 sm:right-10">
-                <img
+                <ImageWithSkeleton
                   src="/images/dev-coding.jpg"
                   alt="Coding a client website in a home studio in Noida"
-                  className="hover-lift h-24 w-full rounded-xl border border-border object-cover sm:h-28"
+                  className="hover-lift h-24 w-full rounded-xl sm:h-28"
+                  imgClassName="h-full w-full rounded-xl border border-border object-cover"
                 />
-                <img
+                <ImageWithSkeleton
                   src="/images/dev-research.jpg"
                   alt="Researching local Noida businesses that need websites"
-                  className="hover-lift h-24 w-full rounded-xl border border-border object-cover sm:h-28"
+                  className="hover-lift h-24 w-full rounded-xl sm:h-28"
+                  imgClassName="h-full w-full rounded-xl border border-border object-cover"
                 />
               </div>
             </div>

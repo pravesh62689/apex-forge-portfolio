@@ -1,4 +1,4 @@
-import { Check, X, Clock } from 'lucide-react'
+import { Check, X, Clock, Gift } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { tiers, whatsappLink } from '@/lib/site-config'
 
@@ -86,6 +86,21 @@ export function Pricing() {
                     </li>
                   ))}
                 </ul>
+
+                <div className="mt-6 rounded-2xl border border-success/30 bg-success/5 p-4">
+                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-success">
+                    <Gift className="h-4 w-4" aria-hidden="true" />
+                    Included free with {tier.name}
+                  </p>
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {tier.freeFeatures.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-foreground">
+                        <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" aria-hidden="true" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
                 <div className="mt-auto pt-8">
                   <a

@@ -10,6 +10,7 @@ import { Process } from "@/components/process"
 import { Faq } from "@/components/faq"
 import { FinalCta } from "@/components/final-cta"
 import { WhatsappFab } from "@/components/whatsapp-fab"
+import { ChatAssistant } from "@/components/chat-assistant"
 
 export default function Page() {
   return (
@@ -26,6 +27,7 @@ export default function Page() {
       <Faq />
       <FinalCta />
       <WhatsappFab />
+      <ChatAssistant />
     </main>
   )
 }
