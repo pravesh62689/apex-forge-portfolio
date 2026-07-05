@@ -1,14 +1,16 @@
-// Central config — swap the placeholder numbers here when ready.
+// Central config — swap the placeholder values here when ready.
 export const siteConfig = {
   brand: 'Apex Forge',
   developer: 'Pravesh',
   tagline: 'Websites that win local customers',
-  // Placeholder numbers — replace with real ones (digits only for WhatsApp link)
+  // Placeholder WhatsApp number — replace with the real one (digits only for the wa.me link)
   whatsappNumber: '910000000000',
-  phoneDisplay: '+91 00000 00000',
-  phoneHref: 'tel:+910000000000',
+  // Email is the only public contact detail. Calls happen on WhatsApp.
+  email: 'hello@apexforge.dev',
   location: 'Noida & NCR, India',
 }
+
+export const emailHref = `mailto:${siteConfig.email}`
 
 export function whatsappLink(message: string) {
   return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`
@@ -22,7 +24,10 @@ export type Tier = {
   badge: string
   delivery: string
   description: string
+  // Everything included in the package
   features: { label: string; included: boolean }[]
+  // Highlighted "no extra cost" perks for this category
+  freeFeatures: string[]
   highlighted?: boolean
   cta: string
   whatsappMessage: string
@@ -30,63 +35,78 @@ export type Tier = {
 
 export const tiers: Tier[] = [
   {
-    name: 'Basic',
-    badge: 'Clean & Fast',
+    name: 'Starter',
+    badge: 'Get online fast',
     delivery: 'Live in 2 days',
     description:
-      'A sharp one-page site that gets your business found on Google and reachable on WhatsApp.',
+      'A polished, single-page site that gets your business found on Google and reachable on WhatsApp — everything a first web presence needs.',
     features: [
-      { label: '1-page high-speed website', included: true },
+      { label: 'High-speed single-page website', included: true },
       { label: 'Mobile-first responsive design', included: true },
-      { label: 'Google Maps + reviews embed', included: true },
-      { label: 'One-tap WhatsApp & call buttons', included: true },
-      { label: 'Basic on-page SEO setup', included: true },
-      { label: 'Free SSL & hosting setup', included: true },
-      { label: 'Multi-section pages & galleries', included: false },
-      { label: 'Booking / enquiry forms', included: false },
+      { label: 'Google Maps + live reviews embed', included: true },
+      { label: 'One-tap WhatsApp & enquiry buttons', included: true },
+      { label: 'On-page SEO so locals can find you', included: true },
+      { label: 'Contact & opening-hours section', included: true },
+      { label: 'Multi-section pages & photo galleries', included: false },
+      { label: 'Booking / reservation systems', included: false },
     ],
-    cta: 'Get Basic Quote',
+    freeFeatures: [
+      'Free SSL certificate + secure hosting setup',
+      'Free domain guidance (registered in your name)',
+      'Free WhatsApp button integration',
+    ],
+    cta: 'Start with Starter',
     whatsappMessage:
-      "Hi Apex Forge! I'd like a quote for the Basic website (2-day delivery). Let's discuss my business.",
+      "Hi Apex Forge! I'd like a quote for the Starter website (2-day delivery). Let's discuss my business.",
   },
   {
     name: 'Growth',
-    badge: 'Most Popular',
+    badge: 'Most popular',
     delivery: 'Live in 4 days',
     description:
-      'A complete multi-section site built to convert visitors into enquiries and walk-ins.',
+      'A complete multi-section site engineered to turn visitors into enquiries and walk-ins — the sweet spot for most local businesses.',
     features: [
-      { label: 'Everything in Basic', included: true },
-      { label: '4–6 sections or pages', included: true },
-      { label: 'Photo galleries & service menus', included: true },
-      { label: 'Enquiry / booking form with alerts', included: true },
+      { label: 'Everything in Starter', included: true },
+      { label: '5–7 rich sections or pages', included: true },
+      { label: 'Photo galleries & full service menus', included: true },
+      { label: 'Enquiry / booking form with instant alerts', included: true },
       { label: 'Local SEO + structured data (schema)', included: true },
-      { label: 'Scroll animations & premium polish', included: true },
-      { label: 'Google Business Profile guidance', included: true },
-      { label: 'Custom web apps & integrations', included: false },
+      { label: 'Smooth scroll animations & premium polish', included: true },
+      { label: 'Customer review wall from Google', included: true },
+      { label: 'Google Business Profile setup guidance', included: true },
+    ],
+    freeFeatures: [
+      'Free 1 month of edits & fixes after launch',
+      'Free performance tuning (loads under 2s)',
+      'Free analytics dashboard setup',
     ],
     highlighted: true,
-    cta: 'Get Growth Quote',
+    cta: 'Choose Growth',
     whatsappMessage:
       "Hi Apex Forge! I'm interested in the Growth website (4-day delivery). Can we discuss my requirements and a quote?",
   },
   {
     name: 'Premium',
-    badge: 'Built to Spec',
+    badge: 'Fully custom',
     delivery: 'Timeline scoped per project',
     description:
-      'Fully custom builds — booking systems, dashboards, payments, 3D experiences. Scoped feature by feature.',
+      'Multi-page, app-grade builds with real systems — online reservations, payments and an admin dashboard. Scoped feature by feature.',
     features: [
       { label: 'Everything in Growth', included: true },
-      { label: 'Online booking / reservation systems', included: true },
-      { label: 'Payment collection (UPI, cards)', included: true },
-      { label: 'Admin dashboards & lead management', included: true },
-      { label: 'Advanced SEO & analytics setup', included: true },
+      { label: 'Unlimited multi-page architecture', included: true },
+      { label: 'Live booking / reservation system', included: true },
+      { label: 'Online payments (UPI, cards)', included: true },
+      { label: 'Admin dashboard & lead management', included: true },
+      { label: 'Advanced SEO, analytics & automations', included: true },
       { label: '3D & interactive experiences', included: true },
-      { label: 'Multi-language support', included: true },
-      { label: '3 months priority support included', included: true },
+      { label: 'Multi-language (Hindi + English)', included: true },
     ],
-    cta: 'Scope My Project',
+    freeFeatures: [
+      'Free 3 months of priority support',
+      'Free reservation system setup',
+      'Free admin dashboard training call',
+    ],
+    cta: 'Scope my project',
     whatsappMessage:
       "Hi Apex Forge! I need a Premium custom website. Here's what my business does and what I need: ",
   },

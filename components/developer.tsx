@@ -1,5 +1,6 @@
 import { Code2, IndianRupee, MessageCircle, Zap } from 'lucide-react'
 import { Reveal, TiltCard } from '@/components/reveal'
+import { ImageWithSkeleton } from '@/components/image-with-skeleton'
 import { siteConfig, whatsappLink } from '@/lib/site-config'
 
 const points = [

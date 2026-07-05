@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Reveal, TiltCard } from '@/components/reveal'
+import { ImageWithSkeleton } from '@/components/image-with-skeleton'
 import { whatsappLink } from '@/lib/site-config'
 import { demos } from '@/lib/demos'
 
@@ -27,10 +28,11 @@ export function Showcase() {
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/40"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={demo.card || '/placeholder.svg'}
+                    <ImageWithSkeleton
+                      src={demo.card}
                       alt={`${demo.industry} website demo preview`}
-                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      className="h-full w-full"
+                      imgClassName="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                     <span

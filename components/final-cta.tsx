@@ -1,6 +1,6 @@
-import { Phone, ArrowRight } from 'lucide-react'
+import { Mail, ArrowRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
-import { siteConfig, whatsappLink, defaultWhatsappMessage } from '@/lib/site-config'
+import { siteConfig, whatsappLink, defaultWhatsappMessage, emailHref } from '@/lib/site-config'
 
 export function FinalCta() {
   return (
@@ -29,11 +29,11 @@ export function FinalCta() {
               />
             </a>
             <a
-              href={siteConfig.phoneHref}
+              href={emailHref}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-8 py-4 text-base font-bold text-foreground transition-all duration-300 hover:bg-secondary hover:border-primary/40 hover:scale-[1.03] active:scale-[0.98]"
             >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              {siteConfig.phoneDisplay}
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              {siteConfig.email}
             </a>
           </div>
         </Reveal>
