@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { motion, useInView, useAnimation } from 'framer-motion'
 
 type Variant = 'up' | 'left' | 'right' | 'zoom' | 'blur'
 
@@ -12,47 +13,63 @@ const variantClass: Record<Variant, string> = {
   blur: 'reveal-blur',
 }
 
-export function Reveal({
-  children,
-  className = '',
-  delay = 0,
+interface RevealProps {
+  children: React.ReactNode;
+  width?: 'fit-content' | '100%';
+  delay?: number;
+  direction?: 'up' | 'left' | 'right' | 'none';
+  variant?: 'up' | 'left' | 'right' | 'zoom' | 'blur' | 'none';
+  className?: string;
+}
+
+export function Reveal({ 
+  children, 
+  width = '100%', 
+  delay = 0, 
+  direction, 
   variant = 'up',
-}: {
-  children: ReactNode
-  className?: string
-  delay?: number
-  variant?: Variant
-}) {
-  const ref = useRef<HTMLDivElement>(null)
+  className
+}: RevealProps) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const mainControls = useAnimation();
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            el.classList.add('is-visible')
-            observer.unobserve(el)
-          }
-        }
-      },
-      { threshold: 0.12 },
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+    if (isInView) {
+      mainControls.start('visible');
+    }
+  }, [isInView, mainControls]);
+
+  // Map variant to direction if direction is not provided
+  const dir = direction || (variant === 'left' ? 'left' : variant === 'right' ? 'right' : variant === 'none' ? 'none' : 'up');
+  
+  // Convert delay in milliseconds to seconds if it looks like milliseconds (>= 1)
+  const finalDelay = delay >= 1 ? delay / 1000 : delay;
+
+  const variants = {
+    hidden: { 
+      opacity: 0, 
+      y: dir === 'up' ? 40 : 0,
+      x: dir === 'left' ? 40 : dir === 'right' ? -40 : 0,
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      x: 0,
+      transition: { duration: 0.6, delay: finalDelay, ease: [0.22, 1, 0.36, 1] as const }
+    },
+  };
 
   return (
-    <div
-      ref={ref}
-      className={`${variantClass[variant]} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
+    <div ref={ref} className={className} style={{ position: 'relative', width, overflow: 'hidden' }}>
+      <motion.div variants={variants} initial="hidden" animate={mainControls}>
+        {children}
+      </motion.div>
     </div>
   )
 }
+
+
 
 /** 3D tilt-on-hover wrapper. Wrap any card to give it perspective tilt. */
 export function TiltCard({

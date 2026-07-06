@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb" // Can be switched to postgresql
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id               String     @id @default(cuid()) @map("_id")
+  businessName     String
+  category         String     // e.g., Dentist, Salon, PG
+  address          String
+  area             String     // e.g., Sector 18, Sector 62
+  city             String     @default("Noida")
+  phone            String?
+  email            String?
+  websitePresent   Boolean    @default(false)
+  websiteUrl       String?
+  googleRating     Float?
+  reviewsCount     Int        @default(0)
+  mapsUrl          String?
+  
+  // Lead Scoring & Tracking
+  leadScore        Int        @default(0)
+  outreachStatus   String     @default("UNCONTACTED") // UNCONTACTED, EMAILED, CALLED, PITCHED, CLOSED, REJECTED
+  lastContacted    DateTime?
+  nextFollowUp     DateTime?
+  notes            String?
+  
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}

@@ -1,40 +1,59 @@
-'use client'
+'use client';
+import { useState } from 'react';
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
-import { useState } from 'react'
-
-/**
- * Image that shows an animated skeleton until it finishes loading, then fades
- * in. Prevents blank/janky image pop-in across the site.
- */
 export function ImageWithSkeleton({
   src,
   alt,
-  className = '',
-  imgClassName = '',
+  className,
+  wrapperClassName,
+  imgClassName,
+  width,
+  height,
+  fill,
   loading = 'lazy',
-}: {
-  src: string
-  alt: string
-  className?: string
-  imgClassName?: string
-  loading?: 'lazy' | 'eager'
-}) {
-  const [loaded, setLoaded] = useState(false)
+  ...props
+}: any) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const hasSize = width || height || fill;
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {!loaded && <div className="skeleton absolute inset-0" aria-hidden="true" />}
-      <img
-        src={src || '/placeholder.svg'}
-        alt={alt}
-        loading={loading}
-        decoding="async"
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(true)}
-        className={`${imgClassName} transition-opacity duration-500 ${
-          loaded ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+    <div className={cn('relative overflow-hidden', wrapperClassName || className)}>
+      {!isLoaded && (
+        <div className="absolute inset-0 z-10 shimmer rounded-inherit" />
+      )}
+      {hasSize ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          fill={fill}
+          loading={loading}
+          className={cn(
+            'transition-opacity duration-700 ease-in-out',
+            isLoaded ? 'opacity-100' : 'opacity-0',
+            imgClassName || className
+          )}
+          onLoad={() => setIsLoaded(true)}
+          {...props}
+        />
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          loading={loading}
+          className={cn(
+            'transition-opacity duration-700 ease-in-out',
+            isLoaded ? 'opacity-100' : 'opacity-0',
+            imgClassName || className
+          )}
+          onLoad={() => setIsLoaded(true)}
+          {...props}
+        />
+      )}
     </div>
-  )
+  );
 }
