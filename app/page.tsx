@@ -9,7 +9,8 @@ import { Growth } from "@/components/growth"
 import { Process } from "@/components/process"
 import { Faq } from "@/components/faq"
 import { FinalCta } from "@/components/final-cta"
-import { WhatsappFab } from "@/components/whatsapp-fab"
+import { MagneticContactFab } from "@/components/chrome/magnetic-contact-fab"
+import { nicheThemes } from "@/lib/niche-config"
 import { ChatAssistant } from "@/components/chat-assistant"
 
 export default function Page() {
@@ -26,7 +27,7 @@ export default function Page() {
       <Process />
       <Faq />
       <FinalCta />
-      <WhatsappFab />
+      <MagneticContactFab tier="premium" theme={nicheThemes.tech} />
       <ChatAssistant />
     </main>
   )

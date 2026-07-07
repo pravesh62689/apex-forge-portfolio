@@ -560,3 +560,33 @@
     transform: translateX(100%);
   }
 }
+
+/* Evolved skeleton shimmer */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--shimmer-bg, oklch(1 0 0 / 6%));
+}
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    var(--shimmer-accent, oklch(1 0 0 / 8%)),
+    transparent
+  );
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
