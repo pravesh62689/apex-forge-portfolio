@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Reveal, TiltCard } from '@/components/reveal'
-import { ImageWithSkeleton } from '@/components/image-with-skeleton'
+import { Reveal, TiltCard } from '@/components/orchestrator/reveal-orchestrator'
+import { SkeletonImage as ImageWithSkeleton } from '@/components/orchestrator/skeleton-image'
 import { whatsappLink } from '@/lib/site-config'
 import { demos } from '@/lib/demos'
 

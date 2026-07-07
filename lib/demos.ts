@@ -43,7 +43,7 @@ export const demos: Demo[] = [
     premiumFeatures: ['Live table reservation system', 'Multi-branch locator', 'Event & private dining bookings'],
   },
   {
-    slug: 'dental',
+    slug: 'dentist',
     industry: 'Dental Clinic',
     business: 'Smile Craft Dental',
     tagline: 'Painless, modern dentistry with transparent pricing in Noida.',
@@ -144,6 +144,31 @@ export const demos: Demo[] = [
       { name: 'Neha P.', text: 'Paid my annual fee through the website in one tap.' },
     ],
     premiumFeatures: ['Class schedule & slot booking', 'Online membership payments', 'Trainer profiles & plans'],
+  },
+  {
+    slug: 'tech',
+    industry: 'Technology & SaaS',
+    business: 'Perimeter.dev',
+    tagline: 'Secure, fast, boring-in-a-good-way infrastructure and zero-trust migration.',
+    accent: '#2563eb',
+    accentSoft: 'rgba(37,99,235,0.12)',
+    hero: 'https://images.pexels.com/photos/6804612/pexels-photo-6804612.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    card: '/images/portfolio-tech.png',
+    gallery: [
+      { src: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1200', alt: 'Engineer at work' },
+      { src: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1200', alt: 'Server rack' },
+    ],
+    offerings: [
+      { name: 'Zero-Trust Migration', desc: 'BeyondCorp-style rollout, phased over 6 weeks.', price: '$18,000' },
+      { name: 'Platform Engineering', desc: 'IDPs, CI/CD, K8s baselines, golden paths.', price: '$18,000' },
+      { name: 'SRE On-Call', desc: 'PagerDuty-integrated, real humans, SLO-driven.', price: '$28,000/mo' },
+      { name: 'Security Audits', desc: 'SOC-2 & ISO-27001 readiness sprints.', price: '$4,000/mo' },
+    ],
+    reviews: [
+      { name: 'CTO, Series-B Fintech', text: 'Cut our mean-time-to-recovery from 42 minutes to under 5.' },
+      { name: 'VP Eng, HealthTech', text: 'The team ships. And they document. Both, in one contract.' },
+    ],
+    premiumFeatures: ['24/7 SRE on-call', 'SOC-2 & ISO-27001 readiness audits', 'Platform templates portal'],
   },
 ]
 

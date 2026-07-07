@@ -18,8 +18,8 @@ import {
 } from 'lucide-react'
 import type { Demo } from '@/lib/demos'
 import { whatsappLink } from '@/lib/site-config'
-import { Reveal } from '@/components/reveal'
-import { ImageWithSkeleton } from '@/components/image-with-skeleton'
+import { Reveal } from '@/components/orchestrator/reveal-orchestrator'
+import { SkeletonImage as ImageWithSkeleton } from '@/components/orchestrator/skeleton-image'
 
 const TIERS = ['Basic', 'Standard', 'Premium'] as const
 type TierName = (typeof TIERS)[number]

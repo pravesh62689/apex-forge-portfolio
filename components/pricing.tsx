@@ -1,5 +1,5 @@
 import { Check, X, Clock, Gift } from 'lucide-react'
-import { Reveal } from '@/components/reveal'
+import { Reveal } from '@/components/orchestrator/reveal-orchestrator'
 import { tiers, whatsappLink } from '@/lib/site-config'
 
 export function Pricing() {

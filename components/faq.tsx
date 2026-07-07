@@ -1,4 +1,4 @@
-import { Reveal } from '@/components/reveal'
+import { Reveal } from '@/components/orchestrator/reveal-orchestrator'
 import { ChevronDown } from 'lucide-react'
 import { faqs } from '@/lib/knowledge'
 

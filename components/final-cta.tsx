@@ -1,5 +1,5 @@
 import { Mail, ArrowRight } from 'lucide-react'
-import { Reveal } from '@/components/reveal'
+import { Reveal } from '@/components/orchestrator/reveal-orchestrator'
 import { siteConfig, whatsappLink, defaultWhatsappMessage, emailHref } from '@/lib/site-config'
 
 export function FinalCta() {

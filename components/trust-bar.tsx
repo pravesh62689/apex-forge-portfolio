@@ -1,4 +1,4 @@
-import { Reveal, CountUp } from '@/components/reveal'
+import { Reveal, CountUp } from '@/components/orchestrator/reveal-orchestrator'
 
 const facts = [
   {

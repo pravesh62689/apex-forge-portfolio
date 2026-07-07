@@ -1,4 +1,4 @@
-import { Reveal } from '@/components/reveal'
+import { Reveal } from '@/components/orchestrator/reveal-orchestrator'
 
 const steps = [
   {
