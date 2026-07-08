@@ -11,7 +11,7 @@ const steps = [
     step: '02',
     title: 'We design and build',
     desc: 'You send photos, text and your logo. We build a fast, mobile-first site and share a live preview link so you see progress in real time.',
-    time: 'Day 1–2 (Basic) or 1–3 (Growth)',
+    time: 'Day 1–2 (Starter) or 1–3 (Standard)',
   },
   {
     step: '03',
@@ -23,7 +23,7 @@ const steps = [
     step: '04',
     title: 'Go live and grow',
     desc: 'We connect your domain, set up SSL and analytics, and hand over everything. Your site is live, fast, and fully yours.',
-    time: 'Day 2 (Basic) / Day 4 (Growth)',
+    time: 'Day 2 (Starter) / Day 4 (Standard)',
   },
 ]
 

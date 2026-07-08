@@ -4,7 +4,7 @@ export const siteConfig = {
   developer: 'Pravesh',
   tagline: 'Websites that win local customers',
   // Placeholder WhatsApp number — replace with the real one (digits only for the wa.me link)
-  whatsappNumber: '910000000000',
+  whatsappNumber: '916268935890',
   // Email is the only public contact detail. Calls happen on WhatsApp.
   email: 'hello@apexforge.dev',
   location: 'Noida & NCR, India',
@@ -39,7 +39,7 @@ export const tiers: Tier[] = [
   {
     name: 'Starter',
     badge: 'Get online fast',
-    price: '₹4,999',
+    price: '₹7,999',
     priceNote: 'one-time · from',
     delivery: 'Live in 2 days',
     description:
@@ -64,9 +64,9 @@ export const tiers: Tier[] = [
       "Hi Apex Forge! I'd like a quote for the Starter website (2-day delivery). Let's discuss my business.",
   },
   {
-    name: 'Growth',
+    name: 'Standard',
     badge: 'Most popular',
-    price: '₹9,999',
+    price: '₹12,999',
     priceNote: 'one-time · from',
     delivery: 'Live in 4 days',
     description:
@@ -87,20 +87,20 @@ export const tiers: Tier[] = [
       'Free analytics dashboard setup',
     ],
     highlighted: true,
-    cta: 'Choose Growth',
+    cta: 'Choose Standard',
     whatsappMessage:
-      "Hi Apex Forge! I'm interested in the Growth website (4-day delivery). Can we discuss my requirements and a quote?",
+      "Hi Apex Forge! I'm interested in the Standard website (4-day delivery). Can we discuss my requirements and a quote?",
   },
   {
     name: 'Premium',
     badge: 'Fully custom',
-    price: '₹24,999',
+    price: '₹19,999+',
     priceNote: 'one-time · from',
     delivery: 'Timeline scoped per project',
     description:
       'Multi-page, app-grade builds with real systems — online reservations, payments and an admin dashboard. Scoped feature by feature.',
     features: [
-      { label: 'Everything in Growth', included: true },
+      { label: 'Everything in Standard', included: true },
       { label: 'Unlimited multi-page architecture', included: true },
       { label: 'Live booking / reservation system', included: true },
       { label: 'Online payments (UPI, cards)', included: true },

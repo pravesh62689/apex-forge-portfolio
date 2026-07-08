@@ -36,7 +36,7 @@ export function Hero() {
             <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground text-pretty">
               This isn&apos;t just a website — it&apos;s the path your customers travel from a
               Google search to your front door. Fast, mobile-first, and built personally by a
-              software engineer. A Starter site goes live in 2 days, a Growth site in 4.
+              software engineer. A Starter site goes live in 2 days, a Standard site in 4.
             </p>
 
             {/* Journey stepper */}

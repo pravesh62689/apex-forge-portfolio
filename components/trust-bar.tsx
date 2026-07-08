@@ -7,7 +7,7 @@ const facts = [
   },
   {
     stat: <CountUp end={4} suffix=" days" className="tabular-nums" />,
-    label: 'for a complete Growth site with forms, galleries and local SEO.',
+    label: 'for a complete Standard site with forms, galleries and local SEO.',
   },
   {
     stat: <CountUp end={100} suffix="%" className="tabular-nums" />,

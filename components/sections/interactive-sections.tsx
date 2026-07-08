@@ -330,7 +330,7 @@ export function FooterSection({ theme, content }: { theme: NicheTheme; content: 
         </div>
         <div>
           <p className={cn('text-xs font-semibold uppercase tracking-widest mb-2', theme.primaryText)}>Contact</p>
-          <p className={cn('text-sm', theme.text)}>+91 99999 99999</p>
+          <p className={cn('text-sm', theme.text)}>+91 62689 35890</p>
           <p className={cn('text-sm', theme.text)}>hello@{content.business.toLowerCase().replace(/[^a-z]/g, '')}.in</p>
         </div>
         <div>

@@ -209,10 +209,10 @@ export const nicheContent: Record<Niche, NicheContent> = {
     subhead: 'We ship secure, fast, boring-in-a-good-way infrastructure for teams that can\'t afford drama.',
     business: 'Perimeter.dev',
     location: 'Bengaluru + Remote',
-    heroImage: 'https://images.pexels.com/photos/6804612/pexels-photo-6804612.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    heroImage: '/images/tech-hero.jpg',
     galleryImages: [
-      { src: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1200', alt: 'Engineer at work' },
-      { src: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1200', alt: 'Server rack' },
+      { src: '/images/tech-engineer.png', alt: 'Engineer at work' },
+      { src: '/images/tech-servers.png', alt: 'Server rack' },
     ],
     services: [
       { name: 'Zero-Trust Migration', desc: 'BeyondCorp-style rollout, phased over 6 weeks.' },

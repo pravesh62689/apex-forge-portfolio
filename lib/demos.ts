@@ -152,11 +152,11 @@ export const demos: Demo[] = [
     tagline: 'Secure, fast, boring-in-a-good-way infrastructure and zero-trust migration.',
     accent: '#2563eb',
     accentSoft: 'rgba(37,99,235,0.12)',
-    hero: 'https://images.pexels.com/photos/6804612/pexels-photo-6804612.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    hero: '/images/tech-hero.jpg',
     card: '/images/portfolio-tech.png',
     gallery: [
-      { src: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1200', alt: 'Engineer at work' },
-      { src: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1200', alt: 'Server rack' },
+      { src: '/images/tech-engineer.png', alt: 'Engineer at work' },
+      { src: '/images/tech-servers.png', alt: 'Server rack' },
     ],
     offerings: [
       { name: 'Zero-Trust Migration', desc: 'BeyondCorp-style rollout, phased over 6 weeks.', price: '$18,000' },

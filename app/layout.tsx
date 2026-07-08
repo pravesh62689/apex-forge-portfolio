@@ -1,17 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { 
-  Inter, 
-  Space_Grotesk,
-  Plus_Jakarta_Sans,
-  Anton,
-  Sora,
-  Italiana,
-  Karla,
-  Fraunces,
-  Nunito,
-  Geist,
-  Geist_Mono
+import {
+  Inter, Space_Grotesk, Plus_Jakarta_Sans, Anton, Sora,
+  Italiana, Karla, Fraunces, Nunito, Geist, Geist_Mono
 } from 'next/font/google'
 import { IntroLoader } from '@/components/intro-loader'
 import './theme.css'
@@ -28,11 +19,59 @@ const nunito = Nunito({ subsets: ['latin'], variable: '--font-nunito' })
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
 
+// --- PRODUCTION SE0 METADATA CONFIGURATION ---
 export const metadata: Metadata = {
-  title: 'Apex Forge — Premium Websites for Local Businesses | Noida & NCR',
-  description:
-    'Fast, mobile-first websites for local businesses, built personally by a software engineer in Noida. Basic sites live in 2 days, Growth sites in 4 days, and fully custom Premium builds — see live demos and get a personal quote on WhatsApp.',
-  generator: 'v0.app',
+  metadataBase: new URL('https://apexforge.dev'), // Replace with your live domain
+  title: {
+    default: 'Apex Forge | Premium Web Design Agency in Noida & NCR',
+    template: '%s | Apex Forge Noida'
+  },
+  description: 'Fast, high-performance, mobile-first websites for local businesses built personally by an expert software engineer in Noida. One-page business sites live in 48 hours. See live demos.',
+  keywords: [
+    'Web design agency in Noida',
+    'Website developer in Noida',
+    'Freelance web developer Noida NCR',
+    'One page website price India',
+    'Local business website builder Noida',
+    'Next.js developer Noida Delhi NCR',
+    'Affordable website design for small business'
+  ],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Apex Forge | Premium Websites for Local Businesses in Noida',
+    description: 'Get your local business online in 48 hours. Premium, high-converting 1-page websites built directly by a software engineer.',
+    url: 'https://apexforge.dev',
+    siteName: 'Apex Forge',
+    locale: 'en_IN',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg', // Place a high-quality preview image (1200x630) in your /public directory
+        width: 1200,
+        height: 630,
+        alt: 'Apex Forge Website Design Platform',
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Apex Forge | Premium Local Website Development',
+    description: 'Get a professional, blazing fast website for your business in 2 days.',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export const viewport: Viewport = {

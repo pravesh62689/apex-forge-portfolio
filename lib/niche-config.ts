@@ -179,27 +179,26 @@ export const nicheThemes: Record<Niche, NicheTheme> = {
     fontBody: 'var(--font-geist-mono)',
     signatureMoment: 'data-flow-pulse',
     ctaLabel: 'Get a Quote',
-    channel: 'email',
+    channel: 'whatsapp',
   },
 }
 
-// ─── TIER META ─────────────────────────────────────────────────────────────
 export const tierMeta: Record<Tier, { name: string; price: string; blurb: string; delivery: string }> = {
   basic: {
     name: 'Basic',
-    price: '₹6,000 — ₹8,000',
+    price: '₹7,999',
     blurb: 'A fast, professional online presence. Ships in 2 days.',
     delivery: '2 days',
   },
   moderate: {
-    name: 'Moderate',
-    price: '₹12,000 — ₹15,000',
+    name: 'Standard',
+    price: '₹12,999',
     blurb: 'Lead-gen ready. Interactions, forms, social proof.',
     delivery: '4 days',
   },
   premium: {
     name: 'Premium',
-    price: '₹20,000+',
+    price: '₹19,999+',
     blurb: 'The conversion engine. Signature motion. Custom everything.',
     delivery: '7-10 days',
   },

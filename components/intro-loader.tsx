@@ -13,6 +13,21 @@ export function IntroLoader() {
   const [phase, setPhase] = useState<'run' | 'reveal' | 'done'>('run')
 
   useEffect(() => {
+    // Suppress upstream ThreeJS Clock deprecation warnings from react-three-fiber internal libraries
+    if (typeof window !== 'undefined') {
+      const originalWarn = console.warn
+      console.warn = (...args) => {
+        if (
+          args[0] &&
+          typeof args[0] === 'string' &&
+          args[0].includes('THREE.Clock: This module has been deprecated')
+        ) {
+          return
+        }
+        originalWarn(...args)
+      }
+    }
+
     const reduced =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -21,14 +36,51 @@ export function IntroLoader() {
       return
     }
     document.body.style.overflow = 'hidden'
-    const revealTimer = setTimeout(() => setPhase('reveal'), 2600)
-    const doneTimer = setTimeout(() => {
-      setPhase('done')
-      document.body.style.overflow = ''
-    }, 3500)
+
+    let isRevealing = false
+    let doneTimer: NodeJS.Timeout
+
+    const triggerReveal = () => {
+      if (isRevealing) return
+      isRevealing = true
+      setPhase('reveal')
+      doneTimer = setTimeout(() => {
+        setPhase('done')
+        document.body.style.overflow = ''
+      }, 900)
+    }
+
+    // Safety fallback: reveal after max 4.5s regardless
+    const safetyTimer = setTimeout(() => {
+      triggerReveal()
+    }, 4500)
+
+    // Check loader readiness based on page loaded + image load complete state
+    const checkResources = () => {
+      if (document.readyState === 'complete') {
+        const imgs = Array.from(document.images).filter(
+          (img) => img.getAttribute('loading') !== 'lazy'
+        )
+        const allLoaded = imgs.every((img) => img.complete)
+        if (allLoaded) {
+          // Add a short visual hold (e.g. 500ms) for loading animation smooth flow
+          setTimeout(triggerReveal, 500)
+        } else {
+          // Re-check periodically
+          setTimeout(checkResources, 150)
+        }
+      } else {
+        // Wait for page load event, then check images
+        window.addEventListener('load', checkResources, { once: true })
+      }
+    }
+
+    // Run resource loader check
+    checkResources()
+
     return () => {
-      clearTimeout(revealTimer)
-      clearTimeout(doneTimer)
+      clearTimeout(safetyTimer)
+      if (doneTimer) clearTimeout(doneTimer)
       document.body.style.overflow = ''
     }
   }, [])

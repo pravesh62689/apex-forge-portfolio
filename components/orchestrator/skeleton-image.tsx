@@ -71,48 +71,28 @@ export function SkeletonImage({
         )}
       />
 
-      {hasSize ? (
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          fill={fill}
-          priority={priority || loading === 'eager'}
-          onLoad={() => setLoaded(true)}
-          className={cn(
-            'transition-[opacity,filter,transform] duration-700 ease-in-out',
-            isPremium
-              ? loaded
-                ? 'opacity-100 blur-0 scale-100 transition-[opacity,filter,transform] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]'
-                : 'opacity-0 blur-[10px] scale-[1.03]'
-              : loaded
-                ? 'opacity-100 duration-500'
-                : 'opacity-0',
-            imgClassName || className
-          )}
-          {...props}
-        />
-      ) : (
-        <img
-          src={src}
-          alt={alt}
-          loading={resolvedLoading}
-          onLoad={() => setLoaded(true)}
-          className={cn(
-            'absolute inset-0 h-full w-full object-cover will-change-transform',
-            isPremium
-              ? loaded
-                ? 'opacity-100 blur-0 scale-100 transition-[opacity,filter,transform] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]'
-                : 'opacity-0 blur-[10px] scale-[1.03]'
-              : loaded
-                ? 'opacity-100 transition-opacity duration-500'
-                : 'opacity-0',
-            imgClassName || className,
-          )}
-          {...props}
-        />
-      )}
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        fill={!width && !height ? true : fill}
+        priority={priority || resolvedLoading === 'eager'}
+        onLoad={() => setLoaded(true)}
+        className={cn(
+          'transition-[opacity,filter,transform] duration-700 ease-in-out',
+          !width && !height && 'absolute inset-0 h-full w-full object-cover',
+          isPremium
+            ? loaded
+              ? 'opacity-100 blur-0 scale-100 transition-[opacity,filter,transform] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]'
+              : 'opacity-0 blur-[10px] scale-[1.03]'
+            : loaded
+              ? 'opacity-100 duration-500'
+              : 'opacity-0',
+          imgClassName || className
+        )}
+        {...props}
+      />
     </div>
   )
 }
