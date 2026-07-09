@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:"$Sreact.suspense"
+3:I[848,["/_next/static/chunks/10__yn5tq4tiw.js","/_next/static/chunks/0hry81h-y~y9b.js","/_next/static/chunks/0ywlue_ly3ge4.js","/_next/static/chunks/0icsuo16_tph9.js"],"default"]
+4:I[20206,["/_next/static/chunks/10__yn5tq4tiw.js","/_next/static/chunks/0hry81h-y~y9b.js"],"OutletBoundary"]
+0:{"rsc":["$","$1","c",{"children":[["$","$2",null,{"fallback":["$","div",null,{"className":"min-h-screen bg-[#101014] text-white/50 flex items-center justify-center","children":"Loading demo experience..."}],"children":["$","$L3",null,{"slug":"restaurant"}]}],[["$","script","script-0",{"src":"/_next/static/chunks/0ywlue_ly3ge4.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/0icsuo16_tph9.js","async":true}]],["$","$L4",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"37mmEjzCMfHv3jc3qzxdV"}
+5:null
