@@ -6,7 +6,7 @@ export const siteConfig = {
   // Placeholder WhatsApp number — replace with the real one (digits only for the wa.me link)
   whatsappNumber: '916268935890',
   // Email is the only public contact detail. Calls happen on WhatsApp.
-  email: 'hello@apexforge.dev',
+  email: 'apexforgetechnologies@gmail.com',
   location: 'Noida & NCR, India',
 }
 

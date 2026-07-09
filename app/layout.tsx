@@ -21,10 +21,10 @@ const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono'
 
 // --- PRODUCTION SE0 METADATA CONFIGURATION ---
 export const metadata: Metadata = {
-  metadataBase: new URL('https://apexforge.dev'), // Replace with your live domain
+  metadataBase: new URL('https://apexforgetechnologies.com'), // Swapped to your custom domain
   title: {
     default: 'Apex Forge | Premium Web Design Agency in Noida & NCR',
-    template: '%s | Apex Forge Noida'
+    template: '%s | Apex Forge'
   },
   description: 'Fast, high-performance, mobile-first websites for local businesses built personally by an expert software engineer in Noida. One-page business sites live in 48 hours. See live demos.',
   keywords: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Apex Forge | Premium Websites for Local Businesses in Noida',
     description: 'Get your local business online in 48 hours. Premium, high-converting 1-page websites built directly by a software engineer.',
-    url: 'https://apexforge.dev',
+    url: 'https://apexforgetechnologies.com',
     siteName: 'Apex Forge',
     locale: 'en_IN',
     type: 'website',
