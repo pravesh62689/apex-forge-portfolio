@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
                 '/static/',       // Blocks raw static assets folders
             ],
         },
-        sitemap: 'https://apexforgetechnologies.com/sitemap.xml', // Direct path to the sitemap built above
+        sitemap: 'https://apex-forge-portfolio.pages.dev/sitemap.xml', // Direct path to the sitemap built above
     };
 }

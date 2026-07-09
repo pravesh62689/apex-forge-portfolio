@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://apexforgetechnologies.com'; // Replace with your production domain
+    const baseUrl = 'https://apex-forge-portfolio.pages.dev'; // Replace with your production domain
 
     return [
         {

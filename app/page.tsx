@@ -18,9 +18,9 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Apex Forge",
-    "image": "https://apexforgetechnologies.com/og-image.jpg", // Point to a branding snapshot
-    "@id": "https://apexforgetechnologies.com",
-    "url": "https://apexforgetechnologies.com",
+    "image": "https://apex-forge-portfolio.pages.dev/og-image.jpg", // Point to a branding snapshot
+    "@id": "https://apex-forge-portfolio.pages.dev",
+    "url": "https://apex-forge-portfolio.pages.dev",
     "telephone": "+916268935890", // Swap out with your active operational business contact line
     "priceRange": "INR ₹6,000 - ₹30,000",
     "address": {
